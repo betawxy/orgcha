@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { getPerson, getPersonTeam } from "store/data";
+import { getPerson, getPersonOrgs, getPersonTeam } from "store/data";
 
 export default function PeoplePage() {
   const router = useRouter();
@@ -11,6 +11,7 @@ export default function PeoplePage() {
 
   const person = getPerson(slug as string);
   const personTeam = getPersonTeam(slug as string);
+  const personOrgs = getPersonOrgs(slug as string);
 
   return (
     <PageWrapper>
@@ -25,9 +26,13 @@ export default function PeoplePage() {
         </div>
       ))}
       <div className="mt-3 border-b border-gray-400">Orgs</div>
-      <span className="beta-link">
-        <Link href="/org/facebook">Facebook</Link>
-      </span>
+      {personOrgs.map((o, k) => (
+        <div className="" key={k}>
+          <span className="beta-link">
+            <Link href={`/org/${o.slug}`}>{o.name}</Link>
+          </span>
+        </div>
+      ))}
     </PageWrapper>
   );
 }
