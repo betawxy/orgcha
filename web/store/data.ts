@@ -1,4 +1,4 @@
-export type TPeople = {
+export type TPerson = {
   slug: string;
   name: string;
   reports: string[];
@@ -13,6 +13,8 @@ export type TOrg = {
   team: string[];
 };
 
+export type TPosition = {};
+
 export function getPopularOrgs(): Array<TOrg> {
   return [ORGS["facebook"], ORGS["us-federal-gov"]];
 }
@@ -21,15 +23,15 @@ export function getOrg(slug: string): TOrg {
   return ORGS[slug];
 }
 
-export function getOrgTeam(slug: string): Array<TPeople> {
+export function getOrgTeam(slug: string): Array<TPerson> {
   return ORGS[slug]["team"].map((ps: string) => PEOPLE[ps]);
 }
 
-export function getPerson(slug: string): TPeople {
+export function getPerson(slug: string): TPerson {
   return PEOPLE[slug];
 }
 
-export function getPersonTeam(slug: string): Array<TPeople> {
+export function getPersonTeam(slug: string): Array<TPerson> {
   return PEOPLE[slug]["reports"].map((s: string) => PEOPLE[s]);
 }
 
@@ -60,7 +62,7 @@ const ORGS: { [key: string]: TOrg } = {
   },
 };
 
-const PEOPLE: { [key: string]: TPeople } = {
+const PEOPLE: { [key: string]: TPerson } = {
   "mark-zuckerberg-S8r3": {
     slug: "mark-zuckerberg-S8r3",
     name: "Mark Zuckerberg",

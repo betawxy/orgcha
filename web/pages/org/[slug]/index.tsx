@@ -3,14 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { getOrg, getOrgTeam, TOrg, TPeople } from "store/data";
+import { getOrg, getOrgTeam, TOrg, TPerson } from "store/data";
 
 export default function OrgPage() {
   const router = useRouter();
   const { slug } = router.query;
 
   const org: TOrg = getOrg(slug as string);
-  const team: TPeople[] = getOrgTeam(slug as string);
+  const team: TPerson[] = getOrgTeam(slug as string);
 
   return (
     <PageWrapper>
