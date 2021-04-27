@@ -15,6 +15,7 @@ export default function OrgPage() {
   return (
     <PageWrapper>
       <div className="text-xl my-6">Org - {org.name}</div>
+      <p>{org.about}</p>
       <div className="border-b border-gray-300 mt-3">Team</div>
       {team.map((people, key) => (
         <div key={key} className="">
