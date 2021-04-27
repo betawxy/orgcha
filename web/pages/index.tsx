@@ -2,8 +2,10 @@ import React from "react";
 import Link from "next/link";
 
 import PageWrapper from "components/pageWrapper";
+import { getPopularOrgs } from "store/data";
 
 export default function Index() {
+  const popularOrgs = getPopularOrgs();
   return (
     <PageWrapper>
       <div className="w-full my-3 p-6 bg-white rounded">
@@ -12,16 +14,13 @@ export default function Index() {
         </div>
       </div>
       <div className="space-y-3">
-        <div className="">
-          <span className="beta-link">
-            <Link href="/org/us-federal-gov">US Federal Government</Link>
-          </span>
-        </div>
-        <div className="">
-          <span className="beta-link">
-            <Link href="/org/facebook">Facebook</Link>
-          </span>
-        </div>
+        {popularOrgs.map((org, key) => (
+          <div key={key} className="">
+            <span className="beta-link">
+              <Link href={`/org/${org.slug}`}>{org.name}</Link>
+            </span>
+          </div>
+        ))}
       </div>
     </PageWrapper>
   );
