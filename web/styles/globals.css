@@ -5,3 +5,15 @@
 body {
   background: #eee;
 }
+
+@layer components {
+  .beta-page-wrapper {
+    @apply flex flex-col justify-between w-screen h-screen;
+  }
+  .beta-hf-wrapper {
+    @apply flex flex-none items-center w-full;
+  }
+  .beta-container {
+    @apply container mx-auto max-w-screen-lg w-full;
+  }
+}
