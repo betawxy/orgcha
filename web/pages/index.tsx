@@ -1,5 +1,7 @@
-import Head from "next/head";
+import React from "react";
+
+import PageWrapper from "components/pageWrapper";
 
 export default function Home() {
-  return <div className="bg-red-100 h-screen w-screen">home</div>;
+  return <PageWrapper>home</PageWrapper>;
 }
