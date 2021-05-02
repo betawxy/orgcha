@@ -73,7 +73,11 @@ const OPRELS: { [key: string]: TOPRel } = {
     orgSlug: "facebook",
     personSlug: "mark-zuckerberg-S8r3",
     role: "Founder & CEO",
-    reports: ["facebook_chris-cox-89as", "facebook_sheryl-sandberg-da1f"],
+    reports: [
+      "facebook_sheryl-sandberg-da1f",
+      "facebook_chris-cox-89as",
+      "facebook_mike-schroepfer-1sa0",
+    ],
     reportsTo: [],
   },
   "facebook_chris-cox-89as": {
@@ -91,6 +95,22 @@ const OPRELS: { [key: string]: TOPRel } = {
     role: "COO",
     reports: [],
     reportsTo: ["facebook_mark-zuckerberg-S8r3"],
+  },
+  "facebook_mike-schroepfer-1sa0": {
+    slug: "facebook_mike-schroepfer-1sa0",
+    orgSlug: "facebook",
+    personSlug: "mike-schroepfer-1sa0",
+    role: "CTO",
+    reports: ["facebook_andrew-bosworth-8923"],
+    reportsTo: ["facebook_mark-zuckerberg-S8r3"],
+  },
+  "facebook_andrew-bosworth-8923": {
+    slug: "facebook_andrew-bosworth-8923",
+    orgSlug: "facebook",
+    personSlug: "andrew-bosworth-8923",
+    role: "Head of Facebook Reality Labs",
+    reports: [],
+    reportsTo: ["facebook_mike-schroepfer-1sa0"],
   },
   "czi_mark-zuckerberg-S8r3": {
     slug: "czi_mark-zuckerberg-S8r3-zuckerberg-S8r3",
@@ -120,6 +140,8 @@ const ORGS: { [key: string]: TOrg } = {
       "facebook_mark-zuckerberg-S8r3",
       "facebook_sheryl-sandberg-da1f",
       "facebook_chris-cox-89as",
+      "facebook_mike-schroepfer-1sa0",
+      "facebook_andrew-bosworth-8923",
     ],
     image:
       "https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512",
@@ -165,6 +187,20 @@ const PERSONS: { [key: string]: TPerson } = {
     orgs: ["facebook_chris-cox-89as"],
     image:
       "https://www.industryleadersmagazine.com/wp-content/uploads/2020/06/Chris-Cox.jpg",
+  },
+  "mike-schroepfer-1sa0": {
+    slug: "mike-schroepfer-1sa0",
+    name: "Mike Schroepfer",
+    orgs: ["facebook_mike-schroepfer-1sa0"],
+    image:
+      "https://pbs.twimg.com/profile_images/1210715117005889542/qe4GSFW5.jpg",
+  },
+  "andrew-bosworth-8923": {
+    slug: "andrew-bosworth-8923",
+    name: "Andrew Bosworth",
+    orgs: ["facebook_andrew-bosworth-8923"],
+    image:
+      "https://cdn.theorg.com/10682502-f5a6-487e-b33a-7a33560b9c52_large.jpg",
   },
   "joe-biden-9123": {
     slug: "joe-biden-9123",

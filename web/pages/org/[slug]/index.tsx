@@ -24,7 +24,7 @@ export default function OrgPage() {
       </section>
       <section className="my-6 border-t border-blue-300">
         <div className="text-2xl mt-6 mb-3">Team</div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {team.map((pair, key) => (
             <TeamMemberCard key={key} oprel={pair[0]} person={pair[1]} />
           ))}
@@ -42,7 +42,7 @@ export const TeamMemberCard = ({
   person: TPerson;
 }) => {
   return (
-    <div className="flex w-1/4">
+    <div className="flex flex-none w-1/4 my-3">
       <div className="flex-none w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
         <img className="object-fill" src={person.image} />
       </div>
