@@ -30,6 +30,9 @@ export function getOrg(slug: string): TOrg {
 }
 
 export function getOrgTeam(slug: string): Array<[TOrgPerson, TPerson]> {
+  if (!ORGS[slug]) {
+    return [];
+  }
   return ORGS[slug]["team"].map((slug: string) => {
     const orgPerson = ORGPERSONS[slug];
     const person = PEOPLE[orgPerson.personSlug];
@@ -47,6 +50,15 @@ export function getOrgPersons(person: TPerson): Array<[TOrgPerson, TOrg]> {
     const org = ORGS[orgPerson.orgSlug];
     return [orgPerson, org];
   });
+}
+
+export function getReports(
+  orgPerson: TOrgPerson
+): Array<[TOrgPerson, TPerson]> {
+  return orgPerson.reports.map((s) => [
+    ORGPERSONS[s],
+    PEOPLE[ORGPERSONS[s].personSlug],
+  ]);
 }
 
 const ORGPERSONS: { [key: string]: TOrgPerson } = {
@@ -82,7 +94,7 @@ const ORGPERSONS: { [key: string]: TOrgPerson } = {
     slug: "us-federal-gov_joe-biden-9123",
     orgSlug: "us-federal-gov",
     personSlug: "joe-biden-9123",
-    role: "POTOS",
+    role: "President",
     reports: [],
   },
 };
@@ -108,8 +120,9 @@ const ORGS: { [key: string]: TOrg } = {
   },
   "us-federal-gov": {
     slug: "us-federal-gov",
-    name: "US Federal Government",
-    about: "...",
+    name: "Federal government of the United States",
+    about:
+      "The federal government of the United States is the national government of the United States, a federal republic in North America, composed of 50 states, a federal district, five major self-governing territories and several island possessions.",
     team: ["us-federal-gov_joe-biden-9123"],
   },
 };

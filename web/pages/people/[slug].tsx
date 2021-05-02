@@ -3,13 +3,22 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { getPerson, getOrgPersons } from "store/data";
+import {
+  getPerson,
+  getOrgPersons,
+  TOrgPerson,
+  getReports,
+  TPerson,
+} from "store/data";
 
 export default function PeoplePage() {
   const router = useRouter();
   const { slug } = router.query;
 
   const person = getPerson(slug as string);
+  if (!person) {
+    return null;
+  }
   const orgPersons = getOrgPersons(person);
 
   return (
@@ -18,21 +27,33 @@ export default function PeoplePage() {
 
       <div className="mt-6 border-b border-gray-400">Orgs</div>
       {orgPersons.map((pair, k) => (
-        <div className="" key={k}>
-          <span className="beta-link">
-            <Link href={`/org/${pair[1].slug}`}>{pair[1].name}</Link>
-          </span>
+        <div className="mb-3" key={k}>
+          <div>
+            <span>{pair[0].role} of </span>
+            <span className="beta-link">
+              <Link href={`/org/${pair[1].slug}`}>{pair[1].name}</Link>
+            </span>
+          </div>
+          <div className="">
+            <div className="">Reports</div>
+            <ReportsList orgPerson={pair[0]} />
+          </div>
         </div>
       ))}
-      {/* <div className="mt-6 border-b border-gray-400">Reports</div>
-
-      {orgPersons.map((p, k) => (
-        <div className="" key={k}>
-          <span className="beta-link">
-            <Link href={`/people/${p.slug}`}>{p.name}</Link>
-          </span>
-        </div>
-      ))} */}
     </PageWrapper>
   );
 }
+
+const ReportsList = ({ orgPerson }: { orgPerson: TOrgPerson }) => {
+  const reports: Array<[TOrgPerson, TPerson]> = getReports(orgPerson);
+  orgPerson.reports;
+  return (
+    <div>
+      {reports.map((pair, key) => (
+        <div key={key}>
+          {pair[0].role} - {pair[1].name}
+        </div>
+      ))}
+    </div>
+  );
+};

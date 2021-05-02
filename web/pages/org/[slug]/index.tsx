@@ -10,6 +10,9 @@ export default function OrgPage() {
   const { slug } = router.query;
 
   const org: TOrg = getOrg(slug as string);
+  if (!org) {
+    return null;
+  }
   const team: Array<[TOrgPerson, TPerson]> = getOrgTeam(slug as string);
 
   return (
