@@ -19,6 +19,7 @@ export type TOPRel = {
   personSlug: string;
   role: string;
   reports: string[];
+  reportsTo: string[];
 };
 
 export function getPopularOrgs(): Array<TOrg> {
@@ -59,6 +60,13 @@ export function getReports(orgPerson: TOPRel): Array<[TOPRel, TPerson]> {
   ]);
 }
 
+export function getManagers(orgPerson: TOPRel): Array<[TOPRel, TPerson]> {
+  return orgPerson.reportsTo.map((s) => [
+    OPRELS[s],
+    PERSONS[OPRELS[s].personSlug],
+  ]);
+}
+
 const OPRELS: { [key: string]: TOPRel } = {
   "facebook_mark-zuckerberg-S8r3": {
     slug: "facebook_mark-zuckerberg-S8r3",
@@ -66,6 +74,7 @@ const OPRELS: { [key: string]: TOPRel } = {
     personSlug: "mark-zuckerberg-S8r3",
     role: "Founder & CEO",
     reports: ["facebook_chris-cox-89as", "facebook_sheryl-sandberg-da1f"],
+    reportsTo: [],
   },
   "facebook_chris-cox-89as": {
     slug: "facebook_chris-cox-89as",
@@ -73,6 +82,7 @@ const OPRELS: { [key: string]: TOPRel } = {
     personSlug: "chris-cox-89as",
     role: "CPO",
     reports: [],
+    reportsTo: ["facebook_mark-zuckerberg-S8r3"],
   },
   "facebook_sheryl-sandberg-da1f": {
     slug: "facebook_sheryl-sandberg-da1f",
@@ -80,6 +90,7 @@ const OPRELS: { [key: string]: TOPRel } = {
     personSlug: "sheryl-sandberg-da1f",
     role: "COO",
     reports: [],
+    reportsTo: ["facebook_mark-zuckerberg-S8r3"],
   },
   "czi_mark-zuckerberg-S8r3": {
     slug: "czi_mark-zuckerberg-S8r3-zuckerberg-S8r3",
@@ -87,6 +98,7 @@ const OPRELS: { [key: string]: TOPRel } = {
     personSlug: "mark-zuckerberg-S8r3",
     role: "Founder",
     reports: [],
+    reportsTo: [],
   },
   "us-federal-gov_joe-biden-9123": {
     slug: "us-federal-gov_joe-biden-9123",
@@ -94,6 +106,7 @@ const OPRELS: { [key: string]: TOPRel } = {
     personSlug: "joe-biden-9123",
     role: "President",
     reports: [],
+    reportsTo: [],
   },
 };
 

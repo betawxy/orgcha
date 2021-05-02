@@ -9,6 +9,7 @@ import {
   TOPRel,
   getReports,
   TPerson,
+  getManagers,
 } from "store/data";
 import { TeamMemberCard } from "pages/org/[slug]";
 
@@ -41,9 +42,15 @@ export default function PeoplePage() {
               <Link href={`/org/${pair[1].slug}`}>{pair[1].name}</Link>
             </span>
           </div>
+          {pair[0].reportsTo.length > 0 && (
+            <div className="bg-blue-100 rounded p-6 pt-1">
+              <div className="my-6 text-lg">Reports To</div>
+              <ReportsToList orgPerson={pair[0]} />
+            </div>
+          )}
           {pair[0].reports.length > 0 && (
             <div className="bg-blue-100 rounded p-6 pt-1">
-              <div className="my-6 text-lg">Reports</div>
+              <div className="my-6 text-lg">Direct Reports</div>
               <ReportsList orgPerson={pair[0]} />
             </div>
           )}
@@ -55,6 +62,17 @@ export default function PeoplePage() {
 
 const ReportsList = ({ orgPerson }: { orgPerson: TOPRel }) => {
   const reports: Array<[TOPRel, TPerson]> = getReports(orgPerson);
+  return (
+    <div className="flex">
+      {reports.map((pair, key) => (
+        <TeamMemberCard key={key} oprel={pair[0]} person={pair[1]} />
+      ))}
+    </div>
+  );
+};
+
+const ReportsToList = ({ orgPerson }: { orgPerson: TOPRel }) => {
+  const reports: Array<[TOPRel, TPerson]> = getManagers(orgPerson);
   return (
     <div className="flex">
       {reports.map((pair, key) => (
