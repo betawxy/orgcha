@@ -63,7 +63,10 @@ export const TeamMemberCard = ({
 const OrgHeader = ({ org }: { org: TOrg }) => {
   return (
     <section className="flex my-12">
-      <img className="flex flex-none w-24 h-24 rounded" src={org.image} />
+      <img
+        className="flex flex-none w-24 h-24 rounded object-contain"
+        src={org.image}
+      />
       <div className="flex flex-grow items-center">
         <div className="ml-6 text-3xl ml-10 text-gray-800">{org.name}</div>
       </div>

@@ -23,7 +23,7 @@ export type TOPRel = {
 };
 
 export function getPopularOrgs(): Array<TOrg> {
-  return [ORGS["facebook"], ORGS["us-federal-gov"]];
+  return [ORGS["google"], ORGS["facebook"], ORGS["us-federal-gov"]];
 }
 
 export function getOrg(slug: string): TOrg {
@@ -128,6 +128,14 @@ const OPRELS: { [key: string]: TOPRel } = {
     reports: [],
     reportsTo: [],
   },
+  "google_sundar-pichai-124a": {
+    slug: "google_sundar-pichai-124a",
+    orgSlug: "google",
+    personSlug: "sundar-pichai-124a",
+    role: "CEO",
+    reports: [],
+    reportsTo: [],
+  },
 };
 
 const ORGS: { [key: string]: TOrg } = {
@@ -163,6 +171,15 @@ const ORGS: { [key: string]: TOrg } = {
     team: ["us-federal-gov_joe-biden-9123"],
     image:
       "https://upload.wikimedia.org/wikipedia/commons/5/5b/Greater_coat_of_arms_of_the_United_States.svg",
+  },
+  google: {
+    slug: "google",
+    name: "Google LLC",
+    about:
+      "Our mission is to organize the world’s information and make it universally accessible and useful.",
+    team: ["google_sundar-pichai-124a"],
+    image:
+      "https://www.gstatic.com/images/branding/googleg/2x/googleg_standard_color_120dp.png",
   },
 };
 
@@ -208,6 +225,13 @@ const PERSONS: { [key: string]: TPerson } = {
     orgs: ["us-federal-gov_joe-biden-9123"],
     image:
       "https://img.thedailybeast.com/image/upload/dpr_2.0/c_crop,h_3095,w_3095,x_332,y_-1/c_limit,w_128/d_placeholder_euli9k,fl_lossy,q_auto/v1584982783/RTS35TX1_d9m7qp",
+  },
+  "sundar-pichai-124a": {
+    slug: "sundar-pichai-124a",
+    name: "Sundar Pichai",
+    orgs: ["google_sundar-pichai-124a"],
+    image:
+      "https://pbs.twimg.com/profile_images/864282616597405701/M-FEJMZ0_400x400.jpg",
   },
 };
 

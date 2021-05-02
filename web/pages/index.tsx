@@ -20,7 +20,10 @@ export default function Index() {
 const OrgCard = ({ org }: { org: TOrg }) => {
   return (
     <div className="flex">
-      <img className="flex flex-none w-12 h-12 rounded" src={org.image} />
+      <img
+        className="flex flex-none w-12 h-12 rounded object-contain"
+        src={org.image}
+      />
       <div className="flex-grow ml-5">
         <div className="">
           <span className="beta-link text-xl">

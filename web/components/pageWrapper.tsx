@@ -7,7 +7,7 @@ export default function PageWrapper({ children }) {
       <header className="beta-hf-wrapper h-16 bg-blue-800">
         <nav className="beta-container">
           <div className="text-2xl text-white">
-            <Link href="/">OrgCha</Link>
+            <Link href="/">orgcha</Link>
           </div>
         </nav>
       </header>
