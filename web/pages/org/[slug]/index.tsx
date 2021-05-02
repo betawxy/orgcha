@@ -34,7 +34,7 @@ export default function OrgPage() {
   );
 }
 
-const TeamMemberCard = ({
+export const TeamMemberCard = ({
   oprel,
   person,
 }: {

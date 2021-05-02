@@ -157,7 +157,8 @@ const PERSONS: { [key: string]: TPerson } = {
     slug: "joe-biden-9123",
     name: "Joe Biden",
     orgs: ["us-federal-gov_joe-biden-9123"],
-    image: "",
+    image:
+      "https://img.thedailybeast.com/image/upload/dpr_2.0/c_crop,h_3095,w_3095,x_332,y_-1/c_limit,w_128/d_placeholder_euli9k,fl_lossy,q_auto/v1584982783/RTS35TX1_d9m7qp",
   },
 };
 
