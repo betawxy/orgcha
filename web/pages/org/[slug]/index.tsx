@@ -43,7 +43,9 @@ const TeamMemberCard = ({
 }) => {
   return (
     <div className="flex w-1/4">
-      <div className="flex-none w-16 h-16 rounded-full bg-gray-200" />
+      <div className="flex-none w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
+        <img className="object-fill" src={person.image} />
+      </div>
       <div className="flex flex-grow items-center ml-4">
         <div>
           <div className="beta-link text-lg">

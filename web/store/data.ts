@@ -10,6 +10,7 @@ export type TPerson = {
   slug: string;
   name: string;
   orgs: string[];
+  image: string;
 };
 
 export type TOPRel = {
@@ -104,8 +105,8 @@ const ORGS: { [key: string]: TOrg } = {
       "Founded in 2004, Facebook’s mission is to give people the power to build community and bring the world closer together. Over 2 billion people use Facebook, Instagram, WhatsApp, or Messenger every month to stay connected with friends and family, to discover what’s going on in the world, and to share and express what matters to them.",
     team: [
       "facebook_mark-zuckerberg-S8r3",
-      "facebook_chris-cox-89as",
       "facebook_sheryl-sandberg-da1f",
+      "facebook_chris-cox-89as",
     ],
     image:
       "https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512",
@@ -135,21 +136,28 @@ const PERSONS: { [key: string]: TPerson } = {
     slug: "mark-zuckerberg-S8r3",
     name: "Mark Zuckerberg",
     orgs: ["facebook_mark-zuckerberg-S8r3", "czi_mark-zuckerberg-S8r3"],
+    image:
+      "https://pbs.twimg.com/profile_images/378800000639973627/f5513282d87d24168fd8f83daf7ebca0.jpeg",
   },
   "sheryl-sandberg-da1f": {
     slug: "sheryl-sandberg-da1f",
     name: "Sheryl Sandberg",
     orgs: ["facebook_sheryl-sandberg-da1f"],
+    image:
+      "https://mk0globalleaderbprs8.kinstacdn.com/wp-content/uploads/2018/05/Sheryl_Sandberg-128x128.png",
   },
   "chris-cox-89as": {
     slug: "chris-cox-89as",
     name: "Chris Cox",
     orgs: ["facebook_chris-cox-89as"],
+    image:
+      "https://www.industryleadersmagazine.com/wp-content/uploads/2020/06/Chris-Cox.jpg",
   },
   "joe-biden-9123": {
     slug: "joe-biden-9123",
     name: "Joe Biden",
     orgs: ["us-federal-gov_joe-biden-9123"],
+    image: "",
   },
 };
 
