@@ -7,7 +7,7 @@ export default function PageWrapper({ children }) {
       <header className="beta-hf-wrapper h-16 bg-blue-800">
         <nav className="beta-container">
           <div className="text-2xl text-white">
-            <Link href="/">Public OrgChart</Link>
+            <Link href="/">OrgCha</Link>
           </div>
         </nav>
       </header>
@@ -16,7 +16,7 @@ export default function PageWrapper({ children }) {
       </main>
       <footer className="beta-hf-wrapper h-24 bg-blue-100">
         <div className="beta-container">
-          &copy; {new Date().getFullYear()} PublicOrgChart.com
+          &copy; {new Date().getFullYear()} OrgCha.com
         </div>
       </footer>
     </div>
