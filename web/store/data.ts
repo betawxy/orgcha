@@ -12,7 +12,7 @@ export type TPerson = {
   orgs: string[];
 };
 
-export type TOrgPerson = {
+export type TOPRel = {
   slug: string;
   orgSlug: string;
   personSlug: string;
@@ -28,39 +28,37 @@ export function getOrg(slug: string): TOrg {
   return ORGS[slug];
 }
 
-export function getOrgTeam(slug: string): Array<[TOrgPerson, TPerson]> {
+export function getPerson(slug: string): TPerson {
+  return PERSONS[slug];
+}
+
+export function getOrgTeam(slug: string): Array<[TOPRel, TPerson]> {
   if (!ORGS[slug]) {
     return [];
   }
   return ORGS[slug]["team"].map((slug: string) => {
-    const orgPerson = ORGPERSONS[slug];
-    const person = PEOPLE[orgPerson.personSlug];
-    return [orgPerson, person];
+    const rel = OPRELS[slug];
+    const person = PERSONS[rel.personSlug];
+    return [rel, person];
   });
 }
 
-export function getPerson(slug: string): TPerson {
-  return PEOPLE[slug];
-}
-
-export function getOrgPersons(person: TPerson): Array<[TOrgPerson, TOrg]> {
+export function getPersonOrgs(person: TPerson): Array<[TOPRel, TOrg]> {
   return person.orgs.map((s) => {
-    const orgPerson = ORGPERSONS[s];
-    const org = ORGS[orgPerson.orgSlug];
-    return [orgPerson, org];
+    const rel = OPRELS[s];
+    const org = ORGS[rel.orgSlug];
+    return [rel, org];
   });
 }
 
-export function getReports(
-  orgPerson: TOrgPerson
-): Array<[TOrgPerson, TPerson]> {
+export function getReports(orgPerson: TOPRel): Array<[TOPRel, TPerson]> {
   return orgPerson.reports.map((s) => [
-    ORGPERSONS[s],
-    PEOPLE[ORGPERSONS[s].personSlug],
+    OPRELS[s],
+    PERSONS[OPRELS[s].personSlug],
   ]);
 }
 
-const ORGPERSONS: { [key: string]: TOrgPerson } = {
+const OPRELS: { [key: string]: TOPRel } = {
   "facebook_mark-zuckerberg-S8r3": {
     slug: "facebook_mark-zuckerberg-S8r3",
     orgSlug: "facebook",
@@ -132,7 +130,7 @@ const ORGS: { [key: string]: TOrg } = {
   },
 };
 
-const PEOPLE: { [key: string]: TPerson } = {
+const PERSONS: { [key: string]: TPerson } = {
   "mark-zuckerberg-S8r3": {
     slug: "mark-zuckerberg-S8r3",
     name: "Mark Zuckerberg",

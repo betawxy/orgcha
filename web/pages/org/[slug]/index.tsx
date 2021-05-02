@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { getOrg, getOrgTeam, TOrg, TOrgPerson, TPerson } from "store/data";
+import { getOrg, getOrgTeam, TOrg, TOPRel, TPerson } from "store/data";
 
 export default function OrgPage() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function OrgPage() {
   if (!org) {
     return null;
   }
-  const team: Array<[TOrgPerson, TPerson]> = getOrgTeam(slug as string);
+  const team: Array<[TOPRel, TPerson]> = getOrgTeam(slug as string);
 
   return (
     <PageWrapper>

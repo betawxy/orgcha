@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import PageWrapper from "components/pageWrapper";
 import {
   getPerson,
-  getOrgPersons,
-  TOrgPerson,
+  getPersonOrgs,
+  TOPRel,
   getReports,
   TPerson,
 } from "store/data";
@@ -19,14 +19,14 @@ export default function PeoplePage() {
   if (!person) {
     return null;
   }
-  const orgPersons = getOrgPersons(person);
+  const personOrgs = getPersonOrgs(person);
 
   return (
     <PageWrapper>
       <div className="text-xl my-6">{person.name}</div>
 
       <div className="mt-6 border-b border-gray-400">Orgs</div>
-      {orgPersons.map((pair, k) => (
+      {personOrgs.map((pair, k) => (
         <div className="mb-3" key={k}>
           <div>
             <span>{pair[0].role} of </span>
@@ -44,8 +44,8 @@ export default function PeoplePage() {
   );
 }
 
-const ReportsList = ({ orgPerson }: { orgPerson: TOrgPerson }) => {
-  const reports: Array<[TOrgPerson, TPerson]> = getReports(orgPerson);
+const ReportsList = ({ orgPerson }: { orgPerson: TOPRel }) => {
+  const reports: Array<[TOPRel, TPerson]> = getReports(orgPerson);
   orgPerson.reports;
   return (
     <div>
