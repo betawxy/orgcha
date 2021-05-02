@@ -2,26 +2,33 @@ import React from "react";
 import Link from "next/link";
 
 import PageWrapper from "components/pageWrapper";
-import { getPopularOrgs } from "store/data";
+import { getPopularOrgs, TOrg } from "store/data";
 
 export default function Index() {
   const popularOrgs = getPopularOrgs();
   return (
     <PageWrapper>
-      <div className="w-full my-3 p-6 bg-white rounded">
-        <div className="text-3xl  text-center">
-          Open org chart - focusing on the public sector
-        </div>
-      </div>
-      <div className="space-y-3">
+      <div className="mt-10 space-y-3">
         {popularOrgs.map((org, key) => (
-          <div key={key} className="">
-            <span className="beta-link">
-              <Link href={`/org/${org.slug}`}>{org.name}</Link>
-            </span>
-          </div>
+          <OrgCard key={key} org={org} />
         ))}
       </div>
     </PageWrapper>
   );
 }
+
+const OrgCard = ({ org }: { org: TOrg }) => {
+  return (
+    <div className="flex">
+      <div className="flex flex-none w-12 h-12 bg-gray-200 rounded"></div>
+      <div className="flex-grow ml-3">
+        <div className="">
+          <span className="beta-link text-xl">
+            <Link href={`/org/${org.slug}`}>{org.name}</Link>
+          </span>
+        </div>
+        <div className="text-sm line-clamp-2">{org.about}</div>
+      </div>
+    </div>
+  );
+};
