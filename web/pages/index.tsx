@@ -8,7 +8,7 @@ export default function Index() {
   const popularOrgs = getPopularOrgs();
   return (
     <PageWrapper>
-      <div className="mt-10 space-y-3">
+      <div className="mt-10 space-y-6">
         {popularOrgs.map((org, key) => (
           <OrgCard key={key} org={org} />
         ))}
@@ -20,8 +20,11 @@ export default function Index() {
 const OrgCard = ({ org }: { org: TOrg }) => {
   return (
     <div className="flex">
-      <div className="flex flex-none w-12 h-12 bg-gray-200 rounded"></div>
-      <div className="flex-grow ml-3">
+      <img
+        className="flex flex-none w-12 h-12 bg-gray-100 rounded"
+        src={org.image}
+      />
+      <div className="flex-grow ml-5">
         <div className="">
           <span className="beta-link text-xl">
             <Link href={`/org/${org.slug}`}>{org.name}</Link>

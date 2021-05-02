@@ -1,3 +1,11 @@
+export type TOrg = {
+  slug: string;
+  name: string;
+  about: string;
+  team: string[];
+  image: string;
+};
+
 export type TPerson = {
   slug: string;
   name: string;
@@ -11,15 +19,6 @@ export type TOrgPerson = {
   role: string;
   reports: string[];
 };
-
-export type TOrg = {
-  slug: string;
-  name: string;
-  about: string;
-  team: string[];
-};
-
-export type TPosition = {};
 
 export function getPopularOrgs(): Array<TOrg> {
   return [ORGS["facebook"], ORGS["us-federal-gov"]];
@@ -110,6 +109,8 @@ const ORGS: { [key: string]: TOrg } = {
       "facebook_chris-cox-89as",
       "facebook_sheryl-sandberg-da1f",
     ],
+    image:
+      "https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512",
   },
   czi: {
     slug: "czi",
@@ -117,6 +118,8 @@ const ORGS: { [key: string]: TOrg } = {
     about:
       "The Chan Zuckerberg Initiative was founded in 2015 to leverage technology, community-driven solutions and collaboration to help solve some of society’s toughest challenges. Our mission is to build a more inclusive, just, and healthy future for everyone.",
     team: ["czi_mark-zuckerberg-S8r3"],
+    image:
+      "https://chanzuckerberg.com/wp-content/themes/czi/img/logo-minified.svg",
   },
   "us-federal-gov": {
     slug: "us-federal-gov",
@@ -124,6 +127,8 @@ const ORGS: { [key: string]: TOrg } = {
     about:
       "The federal government of the United States is the national government of the United States, a federal republic in North America, composed of 50 states, a federal district, five major self-governing territories and several island possessions.",
     team: ["us-federal-gov_joe-biden-9123"],
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/5/5b/Greater_coat_of_arms_of_the_United_States.svg",
   },
 };
 
