@@ -25,10 +25,6 @@ export default function OrgPage() {
           <span>{` - ${pair[0].role}`}</span>
         </div>
       ))}
-      <div className="border-b border-gray-300 mt-6">Jobs</div>
-      <span className="beta-link">
-        <Link href={`/org/${slug}/jobs`}>Jobs</Link>
-      </span>
     </PageWrapper>
   );
 }

@@ -1,8 +1,6 @@
 export type TPerson = {
   slug: string;
   name: string;
-  reports: string[];
-  //fix me: reports should be in orgs
   orgs: string[];
 };
 
@@ -11,6 +9,7 @@ export type TOrgPerson = {
   orgSlug: string;
   personSlug: string;
   role: string;
+  reports: string[];
 };
 
 export type TOrg = {
@@ -42,12 +41,12 @@ export function getPerson(slug: string): TPerson {
   return PEOPLE[slug];
 }
 
-export function getPersonTeam(slug: string): Array<TPerson> {
-  return PEOPLE[slug]["reports"].map((s: string) => PEOPLE[s]);
-}
-
-export function getPersonOrgs(slug: string): Array<TOrg> {
-  return PEOPLE[slug]["orgs"].map((s: string) => ORGS[s]);
+export function getOrgPersons(person: TPerson): Array<[TOrgPerson, TOrg]> {
+  return person.orgs.map((s) => {
+    const orgPerson = ORGPERSONS[s];
+    const org = ORGS[orgPerson.orgSlug];
+    return [orgPerson, org];
+  });
 }
 
 const ORGPERSONS: { [key: string]: TOrgPerson } = {
@@ -56,24 +55,35 @@ const ORGPERSONS: { [key: string]: TOrgPerson } = {
     orgSlug: "facebook",
     personSlug: "mark-zuckerberg-S8r3",
     role: "Founder & CEO",
+    reports: ["facebook_chris-cox-89as", "facebook_sheryl-sandberg-da1f"],
   },
   "facebook_chris-cox-89as": {
     slug: "facebook_chris-cox-89as",
     orgSlug: "facebook",
     personSlug: "chris-cox-89as",
     role: "CPO",
+    reports: [],
   },
   "facebook_sheryl-sandberg-da1f": {
     slug: "facebook_sheryl-sandberg-da1f",
     orgSlug: "facebook",
     personSlug: "sheryl-sandberg-da1f",
     role: "COO",
+    reports: [],
+  },
+  "czi_mark-zuckerberg-S8r3": {
+    slug: "czi_mark-zuckerberg-S8r3-zuckerberg-S8r3",
+    orgSlug: "czi",
+    personSlug: "mark-zuckerberg-S8r3",
+    role: "Founder",
+    reports: [],
   },
   "us-federal-gov_joe-biden-9123": {
     slug: "us-federal-gov_joe-biden-9123",
     orgSlug: "us-federal-gov",
     personSlug: "joe-biden-9123",
     role: "POTOS",
+    reports: [],
   },
 };
 
@@ -108,26 +118,22 @@ const PEOPLE: { [key: string]: TPerson } = {
   "mark-zuckerberg-S8r3": {
     slug: "mark-zuckerberg-S8r3",
     name: "Mark Zuckerberg",
-    reports: ["sheryl-sandberg-da1f", "chris-cox-89as"],
-    orgs: ["facebook", "czi"],
+    orgs: ["facebook_mark-zuckerberg-S8r3", "czi_mark-zuckerberg-S8r3"],
   },
   "sheryl-sandberg-da1f": {
     slug: "sheryl-sandberg-da1f",
     name: "Sheryl Sandberg",
-    reports: [],
-    orgs: ["facebook"],
+    orgs: ["facebook_sheryl-sandberg-da1f"],
   },
   "chris-cox-89as": {
     slug: "chris-cox-89as",
     name: "Chris Cox",
-    reports: [],
-    orgs: ["facebook"],
+    orgs: ["facebook_chris-cox-89as"],
   },
   "joe-biden-9123": {
     slug: "joe-biden-9123",
     name: "Joe Biden",
-    orgs: ["us-federal-gov"],
-    reports: [],
+    orgs: ["us-federal-gov_joe-biden-9123"],
   },
 };
 
