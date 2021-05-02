@@ -30,8 +30,12 @@ export function getOrg(slug: string): TOrg {
   return ORGS[slug];
 }
 
-export function getOrgTeam(slug: string): Array<TPerson> {
-  return ORGS[slug]["team"].map((ps: string) => PEOPLE[ps]);
+export function getOrgTeam(slug: string): Array<[TOrgPerson, TPerson]> {
+  return ORGS[slug]["team"].map((slug: string) => {
+    const orgPerson = ORGPERSONS[slug];
+    const person = PEOPLE[orgPerson.personSlug];
+    return [orgPerson, person];
+  });
 }
 
 export function getPerson(slug: string): TPerson {
