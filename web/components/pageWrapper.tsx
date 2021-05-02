@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function PageWrapper({ children }) {
   return (
-    <div className="beta-page-wrapper">
+    <div className="beta-page-wrapper text-gray-800">
       <header className="beta-hf-wrapper h-16 bg-blue-800">
         <nav className="beta-container">
           <div className="text-2xl text-white">

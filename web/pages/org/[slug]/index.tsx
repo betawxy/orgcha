@@ -17,17 +17,52 @@ export default function OrgPage() {
 
   return (
     <PageWrapper>
-      <div className="text-xl my-6">{org.name}</div>
-      <p>{org.about}</p>
-      <div className="border-b border-gray-300 mt-6">Team</div>
-      {team.map((pair, key) => (
-        <div key={key} className="">
-          <span className="beta-link">
-            <Link href={`/people/${pair[1].slug}`}>{pair[1].name}</Link>
-          </span>
-          <span>{` - ${pair[0].role}`}</span>
+      <OrgHeader org={org} />
+      <section className="my-6 border-t border-blue-300">
+        <div className="text-2xl mt-6 mb-3">About</div>
+        <p>{org.about}</p>
+      </section>
+      <section className="my-6 border-t border-blue-300">
+        <div className="text-2xl mt-6 mb-3">Team</div>
+        <div className="flex">
+          {team.map((pair, key) => (
+            <TeamMemberCard key={key} oprel={pair[0]} person={pair[1]} />
+          ))}
         </div>
-      ))}
+      </section>
     </PageWrapper>
   );
 }
+
+const TeamMemberCard = ({
+  oprel,
+  person,
+}: {
+  oprel: TOPRel;
+  person: TPerson;
+}) => {
+  return (
+    <div className="flex w-1/4">
+      <div className="flex-none w-16 h-16 rounded-full bg-gray-200" />
+      <div className="flex flex-grow items-center ml-4">
+        <div>
+          <div className="beta-link text-lg">
+            <Link href={`/people/${person.slug}`}>{person.name}</Link>
+          </div>
+          <div className="text-gray-500">{oprel.role}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const OrgHeader = ({ org }: { org: TOrg }) => {
+  return (
+    <section className="flex my-12">
+      <img className="flex flex-none w-24 h-24 rounded" src={org.image} />
+      <div className="flex flex-grow items-center">
+        <div className="ml-6 text-3xl ml-10 text-gray-800">{org.name}</div>
+      </div>
+    </section>
+  );
+};
