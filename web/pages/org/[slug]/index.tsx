@@ -42,14 +42,16 @@ export const TeamMemberCard = ({
   person: TPerson;
 }) => {
   return (
-    <div className="flex flex-none w-1/4 my-3">
+    <div className="flex flex-none w-1/3 my-3">
       <div className="flex-none w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
         <img className="object-fill" src={person.image} />
       </div>
       <div className="flex flex-grow items-center ml-4">
         <div>
-          <div className="beta-link text-lg">
-            <Link href={`/people/${person.slug}`}>{person.name}</Link>
+          <div>
+            <span className="beta-link text-lg">
+              <Link href={`/people/${person.slug}`}>{person.name}</Link>
+            </span>
           </div>
           <div className="text-gray-500">{oprel.role}</div>
         </div>
