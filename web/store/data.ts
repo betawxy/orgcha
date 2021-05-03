@@ -67,6 +67,9 @@ export function getManagers(orgPerson: TOPRel): Array<[TOPRel, TPerson]> {
   ]);
 }
 
+export const DEFAULT_USER_ICON =
+  "https://freesvg.org/img/abstract-user-flat-1.png";
+
 const OPRELS: { [key: string]: TOPRel } = {
   "facebook_mark-zuckerberg-S8r3": {
     slug: "facebook_mark-zuckerberg-S8r3",
@@ -216,8 +219,7 @@ const PERSONS: { [key: string]: TPerson } = {
     slug: "andrew-bosworth-8923",
     name: "Andrew Bosworth",
     orgs: ["facebook_andrew-bosworth-8923"],
-    image:
-      "https://cdn.theorg.com/10682502-f5a6-487e-b33a-7a33560b9c52_large.jpg",
+    image: DEFAULT_USER_ICON,
   },
   "joe-biden-9123": {
     slug: "joe-biden-9123",

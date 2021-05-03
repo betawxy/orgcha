@@ -23,12 +23,15 @@ export default function OrgPage() {
         <p>{org.about}</p>
       </section>
       <section className="my-6 border-t border-blue-300">
-        <div className="text-2xl mt-6 mb-3">Team</div>
+        <div className="text-2xl mt-6 mb-3">Key People</div>
         <div className="flex flex-wrap">
           {team.map((pair, key) => (
             <TeamMemberCard key={key} oprel={pair[0]} person={pair[1]} />
           ))}
         </div>
+      </section>
+      <section className="my-6 border-t border-blue-300">
+        <div className="text-2xl mt-6 mb-3">Org Chart</div>
       </section>
     </PageWrapper>
   );
