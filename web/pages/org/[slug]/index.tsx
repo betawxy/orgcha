@@ -3,7 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { getOrg, getOrgTeam, TOrg, TOPRel, TPerson } from "store/data";
+import {
+  getOrg,
+  getOrgTeam,
+  TOrg,
+  TOPRel,
+  TPerson,
+  getOrgRoots,
+} from "store/data";
 
 export default function OrgPage() {
   const router = useRouter();
@@ -14,6 +21,7 @@ export default function OrgPage() {
     return null;
   }
   const team: Array<[TOPRel, TPerson]> = getOrgTeam(slug as string);
+  const roots: Array<[TOPRel, TPerson]> = getOrgRoots(slug as string);
 
   return (
     <PageWrapper>
@@ -32,6 +40,11 @@ export default function OrgPage() {
       </section>
       <section className="my-6 border-t border-blue-300">
         <div className="text-2xl mt-6 mb-3">Org Chart</div>
+        <div className="flex w-full justify-center">
+          {roots.map((pair, key) => (
+            <OCPersonCard key={key} oprel={pair[0]} person={pair[1]} />
+          ))}
+        </div>
       </section>
     </PageWrapper>
   );
@@ -58,6 +71,34 @@ export const TeamMemberCard = ({
           </div>
           <div className="text-gray-500">{oprel.role}</div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+export const OCPersonCard = ({
+  oprel,
+  person,
+}: {
+  oprel: TOPRel;
+  person: TPerson;
+}) => {
+  return (
+    <div className="flex flex-none w-1/3 p-3 justify-center">
+      <div className="flex bg-blue-100 hover:bg-blue-300 p-3 rounded">
+        <div className="flex-none w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+          <img className="object-fill" src={person.image} />
+        </div>
+        <div className="flex flex-grow items-center ml-4">
+          <div>
+            <div>
+              <span className="beta-link">
+                <Link href={`/people/${person.slug}`}>{person.name}</Link>
+              </span>
+            </div>
+            <div className="text-gray-500 text-sm">{oprel.role}</div>
+          </div>
+        </div>{" "}
       </div>
     </div>
   );
