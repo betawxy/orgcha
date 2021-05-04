@@ -22,6 +22,7 @@ export function getRoleNode(role: TRole): TRoleNode {
     role: role,
     org: ORGS[role.orgSlug],
     person: PERSONS[role.personSlug],
+    expanded: false,
   };
 }
 
@@ -32,7 +33,8 @@ export function getOrgKeyPeople(org: TOrg): Array<TRoleNode> {
 export function getOrgChart(org: TOrg): Array<TRoleNode[]> {
   const roots = org.ocRootsRoleSlugs.map((s) => getRoleNode(getRole(s)));
   const res = [roots];
-  if (roots.length > 0) {
+  if (roots.length > 0 && roots[0].role.directReportsRoleSlugs.length > 0) {
+    roots[0].expanded = true;
     res.push(
       roots[0].role.directReportsRoleSlugs.map((s) => getRoleNode(getRole(s)))
     );

@@ -28,4 +28,5 @@ export type TRoleNode = {
   role: TRole;
   org: TOrg;
   person: TPerson;
+  expanded: boolean;
 };

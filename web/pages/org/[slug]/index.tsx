@@ -98,6 +98,7 @@ export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
       </div>
       <button className="self-center px-2 -mt-3 bg-blue-400 text-white text-sm rounded-xl focus:outline-none">
         {node.role.directReportsRoleSlugs.length}
+        {node.expanded && <span> +</span>}
       </button>
     </div>
   );
