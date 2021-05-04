@@ -89,7 +89,7 @@ export const ORGS: { [key: string]: TOrg } = {
     ],
     image:
       "https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512",
-    ocroots: ["facebook_mark-zuckerberg-S8r3"],
+    ocRootsRoleSlugs: ["facebook_mark-zuckerberg-S8r3"],
   },
   czi: {
     slug: "czi",
@@ -99,7 +99,7 @@ export const ORGS: { [key: string]: TOrg } = {
     roleSlugs: ["czi_mark-zuckerberg-S8r3"],
     image:
       "https://chanzuckerberg.com/wp-content/themes/czi/img/logo-minified.svg",
-    ocroots: ["facebook_mark-zuckerberg-S8r3"],
+    ocRootsRoleSlugs: ["facebook_mark-zuckerberg-S8r3"],
   },
   "us-federal-gov": {
     slug: "us-federal-gov",
@@ -109,7 +109,7 @@ export const ORGS: { [key: string]: TOrg } = {
     roleSlugs: ["us-federal-gov_joe-biden-9123"],
     image:
       "https://upload.wikimedia.org/wikipedia/commons/5/5b/Greater_coat_of_arms_of_the_United_States.svg",
-    ocroots: ["us-federal-gov_joe-biden-9123"],
+    ocRootsRoleSlugs: ["us-federal-gov_joe-biden-9123"],
   },
   google: {
     slug: "google",
@@ -119,7 +119,7 @@ export const ORGS: { [key: string]: TOrg } = {
     roleSlugs: ["google_sundar-pichai-124a"],
     image:
       "https://www.gstatic.com/images/branding/googleg/2x/googleg_standard_color_120dp.png",
-    ocroots: ["google_sundar-pichai-124a"],
+    ocRootsRoleSlugs: ["google_sundar-pichai-124a"],
   },
 };
 

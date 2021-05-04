@@ -38,7 +38,7 @@ export function getOrgRoots(
       return [role, person];
     });
   };
-  let res = helper(ORGS[slug]["ocroots"]);
+  let res = helper(ORGS[slug].ocRootsRoleSlugs);
 
   return res.map((p) => [p[0], p[1], helper(p[0].directReportsRoleSlugs)]);
 }

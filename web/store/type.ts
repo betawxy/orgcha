@@ -3,7 +3,7 @@ export type TOrg = {
   name: string;
   about: string;
   image: string;
-  ocroots: string[];
+  ocRootsRoleSlugs: string[];
   roleSlugs: string[]; // sub collection
 };
 
@@ -11,7 +11,7 @@ export type TPerson = {
   slug: string; // kebab-case-4*base62
   name: string;
   image: string;
-  roleSlugs: string[]; // sub collection
+  roleSlugs: string[];
 };
 
 export type TRole = {
@@ -20,5 +20,14 @@ export type TRole = {
   personSlug: string;
   name: string;
   directReportsRoleSlugs: string[];
-  reportsToRoleSlugs: string[];
+  reportsToRoleSlugs: string[]; // could be multiple but first is main manager
+};
+
+// derived, not for db
+export type TRoleNode = {
+  role: TRole;
+  org: TOrg;
+  person: TPerson;
+  parents: TRoleNode[];
+  children: TRoleNode[];
 };
