@@ -27,15 +27,6 @@ export function getBaseRoleNode(role: TRole): TRoleNode {
   };
 }
 
-export function getRoleNode(role: TRole): TRoleNode {
-  let res = getBaseRoleNode(role);
-  res.parents = role.reportsToRoleSlugs.map((s) => getBaseRoleNode(getRole(s)));
-  res.children = role.directReportsRoleSlugs.map((s) =>
-    getBaseRoleNode(ROLES[s])
-  );
-  return res;
-}
-
 export function getOrgKeyPeople(org: TOrg): Array<TRoleNode> {
   return org.roleSlugs.map((slug: string) => getBaseRoleNode(getRole(slug)));
 }
@@ -54,5 +45,5 @@ export function getOrgChart(org: TOrg): Array<TRoleNode[]> {
 }
 
 export function getPersonOrgs(person: TPerson): Array<TRoleNode> {
-  return person.roleSlugs.map((s) => getRoleNode(getRole(s)));
+  return person.roleSlugs.map((s) => getBaseRoleNode(getRole(s)));
 }
