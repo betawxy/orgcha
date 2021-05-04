@@ -30,7 +30,33 @@ export function getOrgKeyPeople(org: TOrg): Array<TRoleNode> {
   return org.roleSlugs.map((slug: string) => getRoleNode(getRole(slug)));
 }
 
-export function getOrgChart(org: TOrg): Array<TRoleNode[]> {
+export function getOrgChart(
+  org: TOrg,
+  entryRoleSlug: string
+): Array<TRoleNode[]> {
+  const role = getRole(entryRoleSlug);
+  if (!!role && role.orgSlug === org.slug) {
+    let stack = [];
+    let cur = role;
+    while (!!cur) {
+      let curNode = getRoleNode(cur);
+      curNode.expanded = true;
+      stack.push([curNode]);
+      if (cur.reportsToRoleSlugs.length > 0) {
+        cur = getRole(cur.reportsToRoleSlugs[0]);
+      } else {
+        cur = null;
+      }
+    }
+    stack = stack.reverse();
+
+    if (role.directReportsRoleSlugs.length > 0) {
+      stack.push(
+        role.directReportsRoleSlugs.map((s) => getRoleNode(getRole(s)))
+      );
+    }
+    return stack;
+  }
   const roots = org.ocRootsRoleSlugs.map((s) => getRoleNode(getRole(s)));
   const res = [roots];
   if (roots.length > 0 && roots[0].role.directReportsRoleSlugs.length > 0) {

@@ -10,14 +10,13 @@ import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
 
 export default function OrgPage() {
   const router = useRouter();
-  const { slug } = router.query;
-
+  const { slug, n } = router.query;
   const org: TOrg = getOrg(slug as string);
   if (!org) {
     return null;
   }
   const keyPeople: Array<TRoleNode> = getOrgKeyPeople(org);
-  const oc: Array<TRoleNode[]> = getOrgChart(org);
+  const oc: Array<TRoleNode[]> = getOrgChart(org, (n as string) || "");
 
   return (
     <PageWrapper>
