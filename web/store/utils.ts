@@ -40,10 +40,15 @@ export function getOrgKeyPeople(org: TOrg): Array<TRoleNode> {
   return org.roleSlugs.map((slug: string) => getBaseRoleNode(getRole(slug)));
 }
 
-export function getOrgRoots(org: TOrg): Array<TRoleNode> {
-  const res = org.ocRootsRoleSlugs.map((s) => getBaseRoleNode(getRole(s)));
-  if (res.length > 0) {
-    res[0] = getRoleNode(res[0].role);
+export function getOrgChart(org: TOrg): Array<TRoleNode[]> {
+  const roots = org.ocRootsRoleSlugs.map((s) => getBaseRoleNode(getRole(s)));
+  const res = [roots];
+  if (roots.length > 0) {
+    res.push(
+      roots[0].role.directReportsRoleSlugs.map((s) =>
+        getBaseRoleNode(getRole(s))
+      )
+    );
   }
   return res;
 }

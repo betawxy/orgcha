@@ -8,7 +8,7 @@ export const ROLES: { [key: string]: TRole } = {
     slug: "facebook_mark-zuckerberg-S8r3",
     orgSlug: "facebook",
     personSlug: "mark-zuckerberg-S8r3",
-    name: "Founder & CEO",
+    name: "Founder, President & CEO",
     directReportsRoleSlugs: [
       "facebook_sheryl-sandberg-da1f",
       "facebook_chris-cox-89as",

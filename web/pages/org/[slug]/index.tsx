@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
 import { TOrg, TRoleNode } from "store/type";
-import { getOrg, getOrgRoots, getOrgKeyPeople } from "store/utils";
+import { getOrg, getOrgChart, getOrgKeyPeople } from "store/utils";
 
 export default function OrgPage() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function OrgPage() {
     return null;
   }
   const keyPeople: Array<TRoleNode> = getOrgKeyPeople(org);
-  const roots: Array<TRoleNode> = getOrgRoots(org);
+  const oc: Array<TRoleNode[]> = getOrgChart(org);
 
   return (
     <PageWrapper>
@@ -33,12 +33,22 @@ export default function OrgPage() {
         </div>
       </section>
       <section className="my-6 border-t border-blue-300">
-        <div className="text-2xl mt-6 mb-3">Org Chart</div>
-        <div className="flex flex-wrap w-full justify-center">
-          {roots.map((baseNode, key) => (
-            <OCPersonCard key={key} baseNode={baseNode} />
-          ))}
-        </div>
+        <div className="text-2xl mt-6 mb-6">Org Chart</div>
+        {oc.map((row, key) => (
+          <Fragment key={key}>
+            {key > 0 && (
+              <div className="flex flex-col justify-center -mt-4">
+                <div className="self-center h-4 border-l border-blue-400"></div>
+                <div className="self-center w-2/3 h-4 border-t border-l border-r border-blue-400"></div>
+              </div>
+            )}
+            <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-100">
+              {row.map((baseNode, k) => (
+                <OCPersonCard key={k} baseNode={baseNode} />
+              ))}
+            </div>
+          </Fragment>
+        ))}
       </section>
     </PageWrapper>
   );
@@ -69,7 +79,7 @@ export const TeamMemberCard = ({ baseNode }: { baseNode: TRoleNode }) => {
 export const OCPersonCard = ({ baseNode }: { baseNode: TRoleNode }) => {
   return (
     <div className="flex flex-col flex-none w-1/3 px-6 py-4 justify-center">
-      <div className="flex w-full bg-blue-50 hover:bg-blue-200 p-3 rounded">
+      <div className="flex w-full bg-blue-50 hover:bg-white p-3 rounded">
         <div className="flex-none w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
           <img className="object-fill" src={baseNode.person.image} />
         </div>
@@ -87,7 +97,7 @@ export const OCPersonCard = ({ baseNode }: { baseNode: TRoleNode }) => {
         </div>
       </div>
       <button className="self-center px-2 -mt-2 bg-blue-400 text-white text-sm rounded-xl focus:outline-none">
-        {baseNode.children.length}
+        {baseNode.role.directReportsRoleSlugs.length}
       </button>
     </div>
   );
