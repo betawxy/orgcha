@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { TOrg, TRoleNode } from "store/type";
+import { TOrg, TRole, TRoleNode } from "store/type";
 import { getOrg, getOrgChart, getOrgKeyPeople } from "store/utils";
 
 import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
@@ -79,6 +79,7 @@ export const TeamMemberCard = ({ node }: { node: TRoleNode }) => {
 };
 
 export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
+  const openOrgChart = (role: TRole) => {};
   return (
     <div className="flex flex-col flex-none w-1/3 px-6 py-4 justify-center">
       <div className="flex w-full bg-blue-50 hover:bg-white p-3 rounded">
@@ -98,17 +99,28 @@ export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
           </div>
         </div>
       </div>
-      {node.expanded ? (
-        <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800">
-          <div className="mr-1">{node.role.directReportsRoleSlugs.length}</div>
-          {node.expanded ? <BiChevronsUp /> : <BiChevronsDown />}
-        </button>
-      ) : (
-        <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400">
-          <div className="mr-1">{node.role.directReportsRoleSlugs.length}</div>
-          {node.expanded ? <BiChevronsUp /> : <BiChevronsDown />}
-        </button>
-      )}
+      <Link
+        href={{
+          pathname: `/org/${node.org.slug}`,
+          query: { n: node.role.slug },
+        }}
+      >
+        {node.expanded ? (
+          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800">
+            <div className="mr-1">
+              {node.role.directReportsRoleSlugs.length}
+            </div>
+            <BiChevronsUp />
+          </button>
+        ) : (
+          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400">
+            <div className="mr-1">
+              {node.role.directReportsRoleSlugs.length}
+            </div>
+            <BiChevronsDown />
+          </button>
+        )}
+      </Link>
     </div>
   );
 };
