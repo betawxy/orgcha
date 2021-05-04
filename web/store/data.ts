@@ -46,15 +46,23 @@ export function getOrgTeam(slug: string): Array<[TOPRel, TPerson]> {
   });
 }
 
-export function getOrgRoots(slug: string): Array<[TOPRel, TPerson]> {
+export function getOrgRoots(
+  slug: string
+): Array<[TOPRel, TPerson, Array<[TOPRel, TPerson]>]> {
   if (!ORGS[slug]) {
     return [];
   }
-  return ORGS[slug]["ocroots"].map((slug: string) => {
-    const rel = OPRELS[slug];
-    const person = PERSONS[rel.personSlug];
-    return [rel, person];
-  });
+
+  const helper = (rels: string[]): Array<[TOPRel, TPerson]> => {
+    return rels.map((slug: string) => {
+      const rel = OPRELS[slug];
+      const person = PERSONS[rel.personSlug];
+      return [rel, person];
+    });
+  };
+  let res = helper(ORGS[slug]["ocroots"]);
+
+  return res.map((p) => [p[0], p[1], helper(p[0].reports)]);
 }
 
 export function getPersonOrgs(person: TPerson): Array<[TOPRel, TOrg]> {
