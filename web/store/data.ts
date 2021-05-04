@@ -1,14 +1,14 @@
-import { TOPRel, TOrg, TPerson } from "./type";
+import { TRole, TOrg, TPerson } from "./type";
 
 export const DEFAULT_USER_ICON =
   "https://freesvg.org/img/abstract-user-flat-1.png";
 
-export const OPRELS: { [key: string]: TOPRel } = {
+export const ROLES: { [key: string]: TRole } = {
   "facebook_mark-zuckerberg-S8r3": {
     slug: "facebook_mark-zuckerberg-S8r3",
     orgSlug: "facebook",
     personSlug: "mark-zuckerberg-S8r3",
-    role: "Founder & CEO",
+    name: "Founder & CEO",
     reports: [
       "facebook_sheryl-sandberg-da1f",
       "facebook_chris-cox-89as",
@@ -20,7 +20,7 @@ export const OPRELS: { [key: string]: TOPRel } = {
     slug: "facebook_chris-cox-89as",
     orgSlug: "facebook",
     personSlug: "chris-cox-89as",
-    role: "CPO",
+    name: "CPO",
     reports: [],
     reportsTo: ["facebook_mark-zuckerberg-S8r3"],
   },
@@ -28,7 +28,7 @@ export const OPRELS: { [key: string]: TOPRel } = {
     slug: "facebook_sheryl-sandberg-da1f",
     orgSlug: "facebook",
     personSlug: "sheryl-sandberg-da1f",
-    role: "COO",
+    name: "COO",
     reports: [],
     reportsTo: ["facebook_mark-zuckerberg-S8r3"],
   },
@@ -36,7 +36,7 @@ export const OPRELS: { [key: string]: TOPRel } = {
     slug: "facebook_mike-schroepfer-1sa0",
     orgSlug: "facebook",
     personSlug: "mike-schroepfer-1sa0",
-    role: "CTO",
+    name: "CTO",
     reports: ["facebook_andrew-bosworth-8923"],
     reportsTo: ["facebook_mark-zuckerberg-S8r3"],
   },
@@ -44,7 +44,7 @@ export const OPRELS: { [key: string]: TOPRel } = {
     slug: "facebook_andrew-bosworth-8923",
     orgSlug: "facebook",
     personSlug: "andrew-bosworth-8923",
-    role: "Head of Facebook Reality Labs",
+    name: "Head of Facebook Reality Labs",
     reports: [],
     reportsTo: ["facebook_mike-schroepfer-1sa0"],
   },
@@ -52,7 +52,7 @@ export const OPRELS: { [key: string]: TOPRel } = {
     slug: "czi_mark-zuckerberg-S8r3-zuckerberg-S8r3",
     orgSlug: "czi",
     personSlug: "mark-zuckerberg-S8r3",
-    role: "Founder",
+    name: "Founder",
     reports: [],
     reportsTo: [],
   },
@@ -60,7 +60,7 @@ export const OPRELS: { [key: string]: TOPRel } = {
     slug: "us-federal-gov_joe-biden-9123",
     orgSlug: "us-federal-gov",
     personSlug: "joe-biden-9123",
-    role: "President",
+    name: "President",
     reports: [],
     reportsTo: [],
   },
@@ -68,7 +68,7 @@ export const OPRELS: { [key: string]: TOPRel } = {
     slug: "google_sundar-pichai-124a",
     orgSlug: "google",
     personSlug: "sundar-pichai-124a",
-    role: "CEO",
+    name: "CEO",
     reports: [],
     reportsTo: [],
   },

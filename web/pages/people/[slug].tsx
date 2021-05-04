@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
 
-import { TOPRel, TPerson } from "store/type";
+import { TRole, TPerson } from "store/type";
 import { getManagers, getPerson, getPersonOrgs, getReports } from "store/utils";
 import { TeamMemberCard } from "pages/org/[slug]";
 
@@ -32,7 +32,7 @@ export default function PeoplePage() {
       {personOrgs.map((pair, k) => (
         <div className="my-6 border-t border-blue-300" key={k}>
           <div className="text-2xl mt-6 mb-3">
-            <span>{pair[0].role} - </span>
+            <span>{pair[0].name} - </span>
             <span className="beta-link">
               <Link href={`/org/${pair[1].slug}`}>{pair[1].name}</Link>
             </span>
@@ -55,23 +55,23 @@ export default function PeoplePage() {
   );
 }
 
-const ReportsList = ({ orgPerson }: { orgPerson: TOPRel }) => {
-  const reports: Array<[TOPRel, TPerson]> = getReports(orgPerson);
+const ReportsList = ({ orgPerson }: { orgPerson: TRole }) => {
+  const reports: Array<[TRole, TPerson]> = getReports(orgPerson);
   return (
     <div className="flex">
       {reports.map((pair, key) => (
-        <TeamMemberCard key={key} oprel={pair[0]} person={pair[1]} />
+        <TeamMemberCard key={key} role={pair[0]} person={pair[1]} />
       ))}
     </div>
   );
 };
 
-const ReportsToList = ({ orgPerson }: { orgPerson: TOPRel }) => {
-  const reports: Array<[TOPRel, TPerson]> = getManagers(orgPerson);
+const ReportsToList = ({ orgPerson }: { orgPerson: TRole }) => {
+  const reports: Array<[TRole, TPerson]> = getManagers(orgPerson);
   return (
     <div className="flex">
       {reports.map((pair, key) => (
-        <TeamMemberCard key={key} oprel={pair[0]} person={pair[1]} />
+        <TeamMemberCard key={key} role={pair[0]} person={pair[1]} />
       ))}
     </div>
   );

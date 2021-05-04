@@ -2,7 +2,7 @@ export type TOrg = {
   slug: string;
   name: string;
   about: string;
-  team: string[];
+  team: string[]; // sub collection
   image: string;
   ocroots: string[];
 };
@@ -10,15 +10,15 @@ export type TOrg = {
 export type TPerson = {
   slug: string;
   name: string;
-  orgs: string[];
+  orgs: string[]; // sub collection
   image: string;
 };
 
-export type TOPRel = {
+export type TRole = {
   slug: string;
   orgSlug: string;
   personSlug: string;
-  role: string;
+  name: string;
   reports: string[];
   reportsTo: string[];
 };

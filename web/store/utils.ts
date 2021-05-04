@@ -1,5 +1,5 @@
-import { OPRELS, ORGS, PERSONS } from "./data";
-import { TOPRel, TOrg, TPerson } from "./type";
+import { ROLES, ORGS, PERSONS } from "./data";
+import { TRole, TOrg, TPerson } from "./type";
 
 export function getPopularOrgs(): Array<TOrg> {
   return [ORGS["google"], ORGS["facebook"], ORGS["us-federal-gov"]];
@@ -13,29 +13,29 @@ export function getPerson(slug: string): TPerson {
   return PERSONS[slug];
 }
 
-export function getOrgTeam(slug: string): Array<[TOPRel, TPerson]> {
+export function getOrgTeam(slug: string): Array<[TRole, TPerson]> {
   if (!ORGS[slug]) {
     return [];
   }
   return ORGS[slug]["team"].map((slug: string) => {
-    const rel = OPRELS[slug];
-    const person = PERSONS[rel.personSlug];
-    return [rel, person];
+    const role = ROLES[slug];
+    const person = PERSONS[role.personSlug];
+    return [role, person];
   });
 }
 
 export function getOrgRoots(
   slug: string
-): Array<[TOPRel, TPerson, Array<[TOPRel, TPerson]>]> {
+): Array<[TRole, TPerson, Array<[TRole, TPerson]>]> {
   if (!ORGS[slug]) {
     return [];
   }
 
-  const helper = (rels: string[]): Array<[TOPRel, TPerson]> => {
-    return rels.map((slug: string) => {
-      const rel = OPRELS[slug];
-      const person = PERSONS[rel.personSlug];
-      return [rel, person];
+  const helper = (roles: string[]): Array<[TRole, TPerson]> => {
+    return roles.map((slug: string) => {
+      const role = ROLES[slug];
+      const person = PERSONS[role.personSlug];
+      return [role, person];
     });
   };
   let res = helper(ORGS[slug]["ocroots"]);
@@ -43,24 +43,21 @@ export function getOrgRoots(
   return res.map((p) => [p[0], p[1], helper(p[0].reports)]);
 }
 
-export function getPersonOrgs(person: TPerson): Array<[TOPRel, TOrg]> {
+export function getPersonOrgs(person: TPerson): Array<[TRole, TOrg]> {
   return person.orgs.map((s) => {
-    const rel = OPRELS[s];
-    const org = ORGS[rel.orgSlug];
-    return [rel, org];
+    const role = ROLES[s];
+    const org = ORGS[role.orgSlug];
+    return [role, org];
   });
 }
 
-export function getReports(orgPerson: TOPRel): Array<[TOPRel, TPerson]> {
-  return orgPerson.reports.map((s) => [
-    OPRELS[s],
-    PERSONS[OPRELS[s].personSlug],
-  ]);
+export function getReports(orgPerson: TRole): Array<[TRole, TPerson]> {
+  return orgPerson.reports.map((s) => [ROLES[s], PERSONS[ROLES[s].personSlug]]);
 }
 
-export function getManagers(orgPerson: TOPRel): Array<[TOPRel, TPerson]> {
+export function getManagers(orgPerson: TRole): Array<[TRole, TPerson]> {
   return orgPerson.reportsTo.map((s) => [
-    OPRELS[s],
-    PERSONS[OPRELS[s].personSlug],
+    ROLES[s],
+    PERSONS[ROLES[s].personSlug],
   ]);
 }

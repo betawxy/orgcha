@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { TOrg, TOPRel, TPerson } from "store/type";
+import { TOrg, TRole, TPerson } from "store/type";
 import { getOrg, getOrgRoots, getOrgTeam } from "store/utils";
 
 export default function OrgPage() {
@@ -14,8 +14,8 @@ export default function OrgPage() {
   if (!org) {
     return null;
   }
-  const team: Array<[TOPRel, TPerson]> = getOrgTeam(slug as string);
-  const roots: Array<[TOPRel, TPerson, Array<[TOPRel, TPerson]>]> = getOrgRoots(
+  const team: Array<[TRole, TPerson]> = getOrgTeam(slug as string);
+  const roots: Array<[TRole, TPerson, Array<[TRole, TPerson]>]> = getOrgRoots(
     slug as string
   );
 
@@ -30,7 +30,7 @@ export default function OrgPage() {
         <div className="text-2xl mt-6 mb-3">Key People</div>
         <div className="flex flex-wrap">
           {team.map((pair, key) => (
-            <TeamMemberCard key={key} oprel={pair[0]} person={pair[1]} />
+            <TeamMemberCard key={key} role={pair[0]} person={pair[1]} />
           ))}
         </div>
       </section>
@@ -40,7 +40,7 @@ export default function OrgPage() {
           {roots.map((pair, key) => (
             <OCPersonCard
               key={key}
-              oprel={pair[0]}
+              role={pair[0]}
               person={pair[1]}
               reports={pair[2]}
             />
@@ -52,10 +52,10 @@ export default function OrgPage() {
 }
 
 export const TeamMemberCard = ({
-  oprel,
+  role,
   person,
 }: {
-  oprel: TOPRel;
+  role: TRole;
   person: TPerson;
 }) => {
   return (
@@ -70,7 +70,7 @@ export const TeamMemberCard = ({
               <Link href={`/people/${person.slug}`}>{person.name}</Link>
             </span>
           </div>
-          <div className="text-gray-500">{oprel.role}</div>
+          <div className="text-gray-500">{role.name}</div>
         </div>
       </div>
     </div>
@@ -78,13 +78,13 @@ export const TeamMemberCard = ({
 };
 
 export const OCPersonCard = ({
-  oprel,
+  role,
   person,
   reports,
 }: {
-  oprel: TOPRel;
+  role: TRole;
   person: TPerson;
-  reports: Array<[TOPRel, TPerson]>;
+  reports: Array<[TRole, TPerson]>;
 }) => {
   return (
     <div className="flex flex-col flex-none w-1/3 px-6 py-4 justify-center">
@@ -99,7 +99,7 @@ export const OCPersonCard = ({
                 <Link href={`/people/${person.slug}`}>{person.name}</Link>
               </span>
             </div>
-            <div className="text-gray-600 text-sm">{oprel.role}</div>
+            <div className="text-gray-600 text-sm">{role.name}</div>
           </div>
         </div>
       </div>
