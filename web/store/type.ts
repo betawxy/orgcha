@@ -1,24 +1,24 @@
 export type TOrg = {
-  slug: string;
+  slug: string; // kebab-case
   name: string;
   about: string;
-  team: string[]; // sub collection
   image: string;
   ocroots: string[];
+  roleSlugs: string[]; // sub collection
 };
 
 export type TPerson = {
-  slug: string;
+  slug: string; // kebab-case-4*base62
   name: string;
-  orgs: string[]; // sub collection
   image: string;
+  roleSlugs: string[]; // sub collection
 };
 
 export type TRole = {
-  slug: string;
+  slug: string; // 8*base62
   orgSlug: string;
   personSlug: string;
   name: string;
-  reports: string[];
-  reportsTo: string[];
+  directReportsRoleSlugs: string[];
+  reportsToRoleSlugs: string[];
 };

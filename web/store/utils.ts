@@ -17,7 +17,7 @@ export function getOrgTeam(slug: string): Array<[TRole, TPerson]> {
   if (!ORGS[slug]) {
     return [];
   }
-  return ORGS[slug]["team"].map((slug: string) => {
+  return ORGS[slug].roleSlugs.map((slug: string) => {
     const role = ROLES[slug];
     const person = PERSONS[role.personSlug];
     return [role, person];
@@ -40,11 +40,11 @@ export function getOrgRoots(
   };
   let res = helper(ORGS[slug]["ocroots"]);
 
-  return res.map((p) => [p[0], p[1], helper(p[0].reports)]);
+  return res.map((p) => [p[0], p[1], helper(p[0].directReportsRoleSlugs)]);
 }
 
 export function getPersonOrgs(person: TPerson): Array<[TRole, TOrg]> {
-  return person.orgs.map((s) => {
+  return person.roleSlugs.map((s) => {
     const role = ROLES[s];
     const org = ORGS[role.orgSlug];
     return [role, org];
@@ -52,11 +52,14 @@ export function getPersonOrgs(person: TPerson): Array<[TRole, TOrg]> {
 }
 
 export function getReports(orgPerson: TRole): Array<[TRole, TPerson]> {
-  return orgPerson.reports.map((s) => [ROLES[s], PERSONS[ROLES[s].personSlug]]);
+  return orgPerson.directReportsRoleSlugs.map((s) => [
+    ROLES[s],
+    PERSONS[ROLES[s].personSlug],
+  ]);
 }
 
 export function getManagers(orgPerson: TRole): Array<[TRole, TPerson]> {
-  return orgPerson.reportsTo.map((s) => [
+  return orgPerson.reportsToRoleSlugs.map((s) => [
     ROLES[s],
     PERSONS[ROLES[s].personSlug],
   ]);
