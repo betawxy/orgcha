@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { TOrg, TRole, TPerson } from "store/type";
-import { getOrg, getOrgRoots, getOrgTeam } from "store/utils";
+import { TOrg, TRoleNode } from "store/type";
+import { getOrg, getOrgRoots, getOrgKeyPeople } from "store/utils";
 
 export default function OrgPage() {
   const router = useRouter();
@@ -14,10 +14,8 @@ export default function OrgPage() {
   if (!org) {
     return null;
   }
-  const team: Array<[TRole, TPerson]> = getOrgTeam(slug as string);
-  const roots: Array<[TRole, TPerson, Array<[TRole, TPerson]>]> = getOrgRoots(
-    slug as string
-  );
+  const keyPeople: Array<TRoleNode> = getOrgKeyPeople(org);
+  const roots: Array<TRoleNode> = getOrgRoots(org);
 
   return (
     <PageWrapper>
@@ -29,21 +27,16 @@ export default function OrgPage() {
       <section className="my-6 border-t border-blue-300">
         <div className="text-2xl mt-6 mb-3">Key People</div>
         <div className="flex flex-wrap">
-          {team.map((pair, key) => (
-            <TeamMemberCard key={key} role={pair[0]} person={pair[1]} />
+          {keyPeople.map((baseNode, key) => (
+            <TeamMemberCard key={key} baseNode={baseNode} />
           ))}
         </div>
       </section>
       <section className="my-6 border-t border-blue-300">
         <div className="text-2xl mt-6 mb-3">Org Chart</div>
         <div className="flex flex-wrap w-full justify-center">
-          {roots.map((pair, key) => (
-            <OCPersonCard
-              key={key}
-              role={pair[0]}
-              person={pair[1]}
-              reports={pair[2]}
-            />
+          {roots.map((baseNode, key) => (
+            <OCPersonCard key={key} baseNode={baseNode} />
           ))}
         </div>
       </section>
@@ -51,60 +44,50 @@ export default function OrgPage() {
   );
 }
 
-export const TeamMemberCard = ({
-  role,
-  person,
-}: {
-  role: TRole;
-  person: TPerson;
-}) => {
+export const TeamMemberCard = ({ baseNode }: { baseNode: TRoleNode }) => {
   return (
     <div className="flex flex-none w-1/3 my-3">
       <div className="flex-none w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
-        <img className="object-fill" src={person.image} />
+        <img className="object-fill" src={baseNode.person.image} />
       </div>
       <div className="flex flex-grow items-center ml-4">
         <div>
           <div>
             <span className="beta-link text-lg">
-              <Link href={`/people/${person.slug}`}>{person.name}</Link>
+              <Link href={`/people/${baseNode.person.slug}`}>
+                {baseNode.person.name}
+              </Link>
             </span>
           </div>
-          <div className="text-gray-500">{role.name}</div>
+          <div className="text-gray-500">{baseNode.role.name}</div>
         </div>
       </div>
     </div>
   );
 };
 
-export const OCPersonCard = ({
-  role,
-  person,
-  reports,
-}: {
-  role: TRole;
-  person: TPerson;
-  reports: Array<[TRole, TPerson]>;
-}) => {
+export const OCPersonCard = ({ baseNode }: { baseNode: TRoleNode }) => {
   return (
     <div className="flex flex-col flex-none w-1/3 px-6 py-4 justify-center">
       <div className="flex w-full bg-blue-50 hover:bg-blue-200 p-3 rounded">
         <div className="flex-none w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-          <img className="object-fill" src={person.image} />
+          <img className="object-fill" src={baseNode.person.image} />
         </div>
         <div className="flex flex-grow items-center ml-4">
           <div>
             <div>
               <span className="beta-link">
-                <Link href={`/people/${person.slug}`}>{person.name}</Link>
+                <Link href={`/people/${baseNode.person.slug}`}>
+                  {baseNode.person.name}
+                </Link>
               </span>
             </div>
-            <div className="text-gray-600 text-sm">{role.name}</div>
+            <div className="text-gray-600 text-sm">{baseNode.role.name}</div>
           </div>
         </div>
       </div>
       <button className="self-center px-2 -mt-2 bg-blue-400 text-white text-sm rounded-xl focus:outline-none">
-        {reports.length}
+        {baseNode.children.length}
       </button>
     </div>
   );

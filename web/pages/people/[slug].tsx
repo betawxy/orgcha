@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
 
-import { TRole, TPerson } from "store/type";
-import { getManagers, getPerson, getPersonOrgs, getReports } from "store/utils";
+import { TRoleNode } from "store/type";
+import { getPerson, getPersonOrgs } from "store/utils";
 import { TeamMemberCard } from "pages/org/[slug]";
 
 export default function PeoplePage() {
@@ -29,24 +29,24 @@ export default function PeoplePage() {
           <div className="ml-6 text-3xl ml-10 text-gray-800">{person.name}</div>
         </div>
       </section>
-      {personOrgs.map((pair, k) => (
+      {personOrgs.map((node, k) => (
         <div className="my-6 border-t border-blue-300" key={k}>
           <div className="text-2xl mt-6 mb-3">
-            <span>{pair[0].name} - </span>
+            <span>{node.role.name} - </span>
             <span className="beta-link">
-              <Link href={`/org/${pair[1].slug}`}>{pair[1].name}</Link>
+              <Link href={`/org/${node.org.slug}`}>{node.org.name}</Link>
             </span>
           </div>
-          {pair[0].reportsToRoleSlugs.length > 0 && (
+          {node.role.reportsToRoleSlugs.length > 0 && (
             <div className="bg-blue-100 rounded p-6 pt-1">
               <div className="my-6 text-lg">Reports To</div>
-              <ReportsToList orgPerson={pair[0]} />
+              <ReportsToList node={node} />
             </div>
           )}
-          {pair[0].directReportsRoleSlugs.length > 0 && (
+          {node.role.directReportsRoleSlugs.length > 0 && (
             <div className="bg-blue-100 rounded p-6 pt-1">
               <div className="my-6 text-lg">Direct Reports</div>
-              <ReportsList orgPerson={pair[0]} />
+              <ReportsList node={node} />
             </div>
           )}
         </div>
@@ -55,23 +55,21 @@ export default function PeoplePage() {
   );
 }
 
-const ReportsList = ({ orgPerson }: { orgPerson: TRole }) => {
-  const reports: Array<[TRole, TPerson]> = getReports(orgPerson);
+const ReportsList = ({ node }: { node: TRoleNode }) => {
   return (
     <div className="flex">
-      {reports.map((pair, key) => (
-        <TeamMemberCard key={key} role={pair[0]} person={pair[1]} />
+      {node.children.map((c, key) => (
+        <TeamMemberCard key={key} baseNode={c} />
       ))}
     </div>
   );
 };
 
-const ReportsToList = ({ orgPerson }: { orgPerson: TRole }) => {
-  const reports: Array<[TRole, TPerson]> = getManagers(orgPerson);
+const ReportsToList = ({ node }: { node: TRoleNode }) => {
   return (
     <div className="flex">
-      {reports.map((pair, key) => (
-        <TeamMemberCard key={key} role={pair[0]} person={pair[1]} />
+      {node.parents.map((p, key) => (
+        <TeamMemberCard key={key} baseNode={p} />
       ))}
     </div>
   );

@@ -1,5 +1,5 @@
 import { ROLES, ORGS, PERSONS } from "./data";
-import { TRole, TOrg, TPerson } from "./type";
+import { TRole, TOrg, TPerson, TRoleNode } from "./type";
 
 export function getPopularOrgs(): Array<TOrg> {
   return [ORGS["google"], ORGS["facebook"], ORGS["us-federal-gov"]];
@@ -13,54 +13,37 @@ export function getPerson(slug: string): TPerson {
   return PERSONS[slug];
 }
 
-export function getOrgTeam(slug: string): Array<[TRole, TPerson]> {
-  if (!ORGS[slug]) {
-    return [];
-  }
-  return ORGS[slug].roleSlugs.map((slug: string) => {
-    const role = ROLES[slug];
-    const person = PERSONS[role.personSlug];
-    return [role, person];
-  });
+export function getRole(slug: string): TRole {
+  return ROLES[slug];
 }
 
-export function getOrgRoots(
-  slug: string
-): Array<[TRole, TPerson, Array<[TRole, TPerson]>]> {
-  if (!ORGS[slug]) {
-    return [];
-  }
-
-  const helper = (roles: string[]): Array<[TRole, TPerson]> => {
-    return roles.map((slug: string) => {
-      const role = ROLES[slug];
-      const person = PERSONS[role.personSlug];
-      return [role, person];
-    });
+export function getBaseRoleNode(role: TRole): TRoleNode {
+  return {
+    role: role,
+    org: ORGS[role.orgSlug],
+    person: PERSONS[role.personSlug],
+    parents: [],
+    children: [],
   };
-  let res = helper(ORGS[slug].ocRootsRoleSlugs);
-
-  return res.map((p) => [p[0], p[1], helper(p[0].directReportsRoleSlugs)]);
 }
 
-export function getPersonOrgs(person: TPerson): Array<[TRole, TOrg]> {
-  return person.roleSlugs.map((s) => {
-    const role = ROLES[s];
-    const org = ORGS[role.orgSlug];
-    return [role, org];
-  });
+export function getRoleNode(role: TRole): TRoleNode {
+  let res = getBaseRoleNode(role);
+  res.parents = role.reportsToRoleSlugs.map((s) => getBaseRoleNode(getRole(s)));
+  res.children = role.directReportsRoleSlugs.map((s) =>
+    getBaseRoleNode(ROLES[s])
+  );
+  return res;
 }
 
-export function getReports(orgPerson: TRole): Array<[TRole, TPerson]> {
-  return orgPerson.directReportsRoleSlugs.map((s) => [
-    ROLES[s],
-    PERSONS[ROLES[s].personSlug],
-  ]);
+export function getOrgKeyPeople(org: TOrg): Array<TRoleNode> {
+  return org.roleSlugs.map((slug: string) => getBaseRoleNode(getRole(slug)));
 }
 
-export function getManagers(orgPerson: TRole): Array<[TRole, TPerson]> {
-  return orgPerson.reportsToRoleSlugs.map((s) => [
-    ROLES[s],
-    PERSONS[ROLES[s].personSlug],
-  ]);
+export function getOrgRoots(org: TOrg): Array<TRoleNode> {
+  return org.ocRootsRoleSlugs.map((s) => getRoleNode(getRole(s)));
+}
+
+export function getPersonOrgs(person: TPerson): Array<TRoleNode> {
+  return person.roleSlugs.map((s) => getRoleNode(getRole(s)));
 }
