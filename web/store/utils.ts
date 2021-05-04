@@ -41,7 +41,11 @@ export function getOrgKeyPeople(org: TOrg): Array<TRoleNode> {
 }
 
 export function getOrgRoots(org: TOrg): Array<TRoleNode> {
-  return org.ocRootsRoleSlugs.map((s) => getRoleNode(getRole(s)));
+  const res = org.ocRootsRoleSlugs.map((s) => getBaseRoleNode(getRole(s)));
+  if (res.length > 0) {
+    res[0] = getRoleNode(res[0].role);
+  }
+  return res;
 }
 
 export function getPersonOrgs(person: TPerson): Array<TRoleNode> {
