@@ -39,7 +39,7 @@ export default function OrgPage() {
             {key > 0 && row.length > 0 && (
               <div className="flex flex-col justify-center -mt-4">
                 <div className="self-center h-4 border-l border-blue-400"></div>
-                <div className="self-center w-2/3 h-4 border-t border-l border-r border-blue-400"></div>
+                <div className="self-center w-full h-4 border-t border-l border-r border-blue-400 rounded-b rounded-full"></div>
               </div>
             )}
             <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-200 rounded">
