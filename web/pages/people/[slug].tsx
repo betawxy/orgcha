@@ -5,12 +5,7 @@ import { useRouter } from "next/router";
 import PageWrapper from "components/pageWrapper";
 
 import { TRoleNode } from "store/type";
-import {
-  getBaseRoleNode,
-  getPerson,
-  getPersonOrgs,
-  getRole,
-} from "store/utils";
+import { getRoleNode, getPerson, getPersonOrgs, getRole } from "store/utils";
 import { TeamMemberCard } from "pages/org/[slug]";
 
 export default function PeoplePage() {
@@ -64,7 +59,7 @@ const ReportsList = ({ node }: { node: TRoleNode }) => {
   return (
     <div className="flex">
       {node.role.directReportsRoleSlugs.map((s, key) => (
-        <TeamMemberCard key={key} baseNode={getBaseRoleNode(getRole(s))} />
+        <TeamMemberCard key={key} node={getRoleNode(getRole(s))} />
       ))}
     </div>
   );
@@ -74,7 +69,7 @@ const ReportsToList = ({ node }: { node: TRoleNode }) => {
   return (
     <div className="flex">
       {node.role.reportsToRoleSlugs.map((s, key) => (
-        <TeamMemberCard key={key} baseNode={getBaseRoleNode(getRole(s))} />
+        <TeamMemberCard key={key} node={getRoleNode(getRole(s))} />
       ))}
     </div>
   );

@@ -17,33 +17,29 @@ export function getRole(slug: string): TRole {
   return ROLES[slug];
 }
 
-export function getBaseRoleNode(role: TRole): TRoleNode {
+export function getRoleNode(role: TRole): TRoleNode {
   return {
     role: role,
     org: ORGS[role.orgSlug],
     person: PERSONS[role.personSlug],
-    parents: [],
-    children: [],
   };
 }
 
 export function getOrgKeyPeople(org: TOrg): Array<TRoleNode> {
-  return org.roleSlugs.map((slug: string) => getBaseRoleNode(getRole(slug)));
+  return org.roleSlugs.map((slug: string) => getRoleNode(getRole(slug)));
 }
 
 export function getOrgChart(org: TOrg): Array<TRoleNode[]> {
-  const roots = org.ocRootsRoleSlugs.map((s) => getBaseRoleNode(getRole(s)));
+  const roots = org.ocRootsRoleSlugs.map((s) => getRoleNode(getRole(s)));
   const res = [roots];
   if (roots.length > 0) {
     res.push(
-      roots[0].role.directReportsRoleSlugs.map((s) =>
-        getBaseRoleNode(getRole(s))
-      )
+      roots[0].role.directReportsRoleSlugs.map((s) => getRoleNode(getRole(s)))
     );
   }
   return res;
 }
 
 export function getPersonOrgs(person: TPerson): Array<TRoleNode> {
-  return person.roleSlugs.map((s) => getBaseRoleNode(getRole(s)));
+  return person.roleSlugs.map((s) => getRoleNode(getRole(s)));
 }

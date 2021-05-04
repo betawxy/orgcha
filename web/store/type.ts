@@ -28,6 +28,4 @@ export type TRoleNode = {
   role: TRole;
   org: TOrg;
   person: TPerson;
-  parents: TRoleNode[];
-  children: TRoleNode[];
 };

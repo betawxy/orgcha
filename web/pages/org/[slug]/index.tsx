@@ -27,8 +27,8 @@ export default function OrgPage() {
       <section className="my-6 border-t border-blue-300">
         <div className="text-2xl mt-6 mb-3">Key People</div>
         <div className="flex flex-wrap">
-          {keyPeople.map((baseNode, key) => (
-            <TeamMemberCard key={key} baseNode={baseNode} />
+          {keyPeople.map((node, key) => (
+            <TeamMemberCard key={key} node={node} />
           ))}
         </div>
       </section>
@@ -43,8 +43,8 @@ export default function OrgPage() {
               </div>
             )}
             <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-200 rounded">
-              {row.map((baseNode, k) => (
-                <OCPersonCard key={k} baseNode={baseNode} />
+              {row.map((node, k) => (
+                <OCPersonCard key={k} node={node} />
               ))}
             </div>
           </Fragment>
@@ -54,50 +54,50 @@ export default function OrgPage() {
   );
 }
 
-export const TeamMemberCard = ({ baseNode }: { baseNode: TRoleNode }) => {
+export const TeamMemberCard = ({ node }: { node: TRoleNode }) => {
   return (
     <div className="flex flex-none w-1/3 my-3">
       <div className="flex-none w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
-        <img className="object-fill" src={baseNode.person.image} />
+        <img className="object-fill" src={node.person.image} />
       </div>
       <div className="flex flex-grow items-center ml-4">
         <div>
           <div>
             <span className="beta-link text-lg">
-              <Link href={`/people/${baseNode.person.slug}`}>
-                {baseNode.person.name}
+              <Link href={`/people/${node.person.slug}`}>
+                {node.person.name}
               </Link>
             </span>
           </div>
-          <div className="text-gray-500">{baseNode.role.name}</div>
+          <div className="text-gray-500">{node.role.name}</div>
         </div>
       </div>
     </div>
   );
 };
 
-export const OCPersonCard = ({ baseNode }: { baseNode: TRoleNode }) => {
+export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
   return (
     <div className="flex flex-col flex-none w-1/3 px-6 py-4 justify-center">
       <div className="flex w-full bg-blue-50 hover:bg-white p-3 rounded">
         <div className="flex-none w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-          <img className="object-fill" src={baseNode.person.image} />
+          <img className="object-fill" src={node.person.image} />
         </div>
         <div className="flex flex-grow items-center ml-4">
           <div>
             <div>
               <span className="beta-link">
-                <Link href={`/people/${baseNode.person.slug}`}>
-                  {baseNode.person.name}
+                <Link href={`/people/${node.person.slug}`}>
+                  {node.person.name}
                 </Link>
               </span>
             </div>
-            <div className="text-gray-600 text-sm">{baseNode.role.name}</div>
+            <div className="text-gray-600 text-sm">{node.role.name}</div>
           </div>
         </div>
       </div>
       <button className="self-center px-2 -mt-3 bg-blue-400 text-white text-sm rounded-xl focus:outline-none">
-        {baseNode.role.directReportsRoleSlugs.length}
+        {node.role.directReportsRoleSlugs.length}
       </button>
     </div>
   );
