@@ -98,14 +98,17 @@ export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
           </div>
         </div>
       </div>
-      <button
-        className={`flex items-center self-center px-2 -mt-3 bg-blue-${
-          node.expanded ? "800" : "400"
-        } text-white text-sm rounded-xl focus:outline-none`}
-      >
-        <div className="mr-1">{node.role.directReportsRoleSlugs.length}</div>
-        {node.expanded ? <BiChevronsUp /> : <BiChevronsDown />}
-      </button>
+      {node.expanded ? (
+        <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800">
+          <div className="mr-1">{node.role.directReportsRoleSlugs.length}</div>
+          {node.expanded ? <BiChevronsUp /> : <BiChevronsDown />}
+        </button>
+      ) : (
+        <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400">
+          <div className="mr-1">{node.role.directReportsRoleSlugs.length}</div>
+          {node.expanded ? <BiChevronsUp /> : <BiChevronsDown />}
+        </button>
+      )}
     </div>
   );
 };
