@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 
 import PageWrapper from "components/pageWrapper";
-import { getPopularOrgs, TOrg } from "store/data";
+import { getPopularOrgs } from "store/utils";
+import { TOrg } from "store/type";
 
 export default function Index() {
   const popularOrgs = getPopularOrgs();

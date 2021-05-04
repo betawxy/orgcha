@@ -3,14 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import {
-  getOrg,
-  getOrgTeam,
-  TOrg,
-  TOPRel,
-  TPerson,
-  getOrgRoots,
-} from "store/data";
+import { TOrg, TOPRel, TPerson } from "store/type";
+import { getOrg, getOrgRoots, getOrgTeam } from "store/utils";
 
 export default function OrgPage() {
   const router = useRouter();

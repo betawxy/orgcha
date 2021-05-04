@@ -3,14 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import {
-  getPerson,
-  getPersonOrgs,
-  TOPRel,
-  getReports,
-  TPerson,
-  getManagers,
-} from "store/data";
+
+import { TOPRel, TPerson } from "store/type";
+import { getManagers, getPerson, getPersonOrgs, getReports } from "store/utils";
 import { TeamMemberCard } from "pages/org/[slug]";
 
 export default function PeoplePage() {
