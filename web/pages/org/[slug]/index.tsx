@@ -6,6 +6,8 @@ import PageWrapper from "components/pageWrapper";
 import { TOrg, TRoleNode } from "store/type";
 import { getOrg, getOrgChart, getOrgKeyPeople } from "store/utils";
 
+import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
+
 export default function OrgPage() {
   const router = useRouter();
   const { slug } = router.query;
@@ -39,10 +41,10 @@ export default function OrgPage() {
             {key > 0 && row.length > 0 && (
               <div className="flex flex-col justify-center -mt-4">
                 <div className="self-center h-4 border-l border-blue-400"></div>
-                <div className="self-center w-full h-4 border-t border-l border-r border-blue-400 rounded-b rounded-full"></div>
+                <div className="self-center w-full h-4 border-t border-l border-r border-blue-400 rounded-t-xl"></div>
               </div>
             )}
-            <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-200 rounded">
+            <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-200 rounded-xl">
               {row.map((node, k) => (
                 <OCPersonCard key={k} node={node} />
               ))}
@@ -96,9 +98,13 @@ export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
           </div>
         </div>
       </div>
-      <button className="self-center px-2 -mt-3 bg-blue-400 text-white text-sm rounded-xl focus:outline-none">
-        {node.role.directReportsRoleSlugs.length}
-        {node.expanded && <span> +</span>}
+      <button
+        className={`flex items-center self-center px-2 -mt-3 bg-blue-${
+          node.expanded ? "800" : "400"
+        } text-white text-sm rounded-xl focus:outline-none`}
+      >
+        <div className="mr-1">{node.role.directReportsRoleSlugs.length}</div>
+        {node.expanded ? <BiChevronsUp /> : <BiChevronsDown />}
       </button>
     </div>
   );
