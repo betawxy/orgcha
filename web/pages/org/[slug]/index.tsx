@@ -36,13 +36,13 @@ export default function OrgPage() {
         <div className="text-2xl mt-6 mb-6">Org Chart</div>
         {oc.map((row, key) => (
           <Fragment key={key}>
-            {key > 0 && (
+            {key > 0 && row.length > 0 && (
               <div className="flex flex-col justify-center -mt-4">
                 <div className="self-center h-4 border-l border-blue-400"></div>
                 <div className="self-center w-2/3 h-4 border-t border-l border-r border-blue-400"></div>
               </div>
             )}
-            <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-100">
+            <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-400 rounded">
               {row.map((baseNode, k) => (
                 <OCPersonCard key={k} baseNode={baseNode} />
               ))}
@@ -96,7 +96,7 @@ export const OCPersonCard = ({ baseNode }: { baseNode: TRoleNode }) => {
           </div>
         </div>
       </div>
-      <button className="self-center px-2 -mt-2 bg-blue-400 text-white text-sm rounded-xl focus:outline-none">
+      <button className="self-center px-2 -mt-3 bg-blue-400 border border-white text-white text-sm rounded-xl focus:outline-none">
         {baseNode.role.directReportsRoleSlugs.length}
       </button>
     </div>
