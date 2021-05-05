@@ -6,6 +6,7 @@ import { getOrg, getOrgChart } from "store/utils";
 import { TOrg, TRole, TRoleNode } from "store/type";
 import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { OrgHeader } from ".";
 
 export default function RolePage() {
   const router = useRouter();
@@ -18,8 +19,9 @@ export default function RolePage() {
 
   return (
     <PageWrapper>
-      <section className="my-6 border-t border-blue-300">
-        <div className="text-2xl mt-6 mb-6">Org Chart</div>
+      <OrgHeader org={org} />
+      <section className="my-6 border-t border-blue-100">
+        <div className="text-xl mt-6 mb-6">Org Chart</div>
         {oc.map((row, key) => (
           <Fragment key={key}>
             {key > 0 && row.length > 0 && (

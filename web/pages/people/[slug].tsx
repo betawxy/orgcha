@@ -22,42 +22,46 @@ export default function PeoplePage() {
     <PageWrapper>
       <section className="flex my-12">
         <img
-          className="flex flex-none w-24 h-24 rounded-full"
+          className="flex flex-none w-20 h-20 rounded-full"
           src={person.image}
         />
         <div className="flex flex-grow items-center">
-          <div className="ml-6 text-3xl ml-10 text-gray-800">{person.name}</div>
+          <div className="ml-6 text-2xl text-gray-800">{person.name}</div>
         </div>
       </section>
-      {personOrgs.map((node, k) => (
-        <div className="my-6 border-t border-blue-300" key={k}>
-          <div className="text-2xl mt-6 mb-3">
-            <span>{node.role.name} - </span>
-            <span className="beta-link">
-              <Link href={`/org/${node.org.slug}`}>{node.org.name}</Link>
-            </span>
+      <section className="space-y-3">
+        {personOrgs.map((node, k) => (
+          <div className="bg-blue-100 py-6 rounded" key={k}>
+            <div className="border-b border-blue-300">
+              <div className="text-xl px-6 pb-3">
+                <span>{node.role.name} - </span>
+                <span className="beta-link">
+                  <Link href={`/org/${node.org.slug}`}>{node.org.name}</Link>
+                </span>
+              </div>
+            </div>
+            {node.role.reportsToRoleSlugs.length > 0 && (
+              <div className="px-6 mt-3">
+                <div className="">Reports To</div>
+                <ReportsToList node={node} />
+              </div>
+            )}
+            {node.role.directReportsRoleSlugs.length > 0 && (
+              <div className="px-6 mt-3">
+                <div className="">Direct Reports</div>
+                <ReportsList node={node} />
+              </div>
+            )}
           </div>
-          {node.role.reportsToRoleSlugs.length > 0 && (
-            <div className="bg-blue-100 rounded p-6 pt-1">
-              <div className="my-6 text-lg">Reports To</div>
-              <ReportsToList node={node} />
-            </div>
-          )}
-          {node.role.directReportsRoleSlugs.length > 0 && (
-            <div className="bg-blue-100 rounded p-6 pt-1">
-              <div className="my-6 text-lg">Direct Reports</div>
-              <ReportsList node={node} />
-            </div>
-          )}
-        </div>
-      ))}
+        ))}
+      </section>
     </PageWrapper>
   );
 }
 
 const ReportsList = ({ node }: { node: TRoleNode }) => {
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       {node.role.directReportsRoleSlugs.map((s, key) => (
         <TeamMemberCard key={key} node={getRoleNode(getRole(s))} />
       ))}
@@ -67,7 +71,7 @@ const ReportsList = ({ node }: { node: TRoleNode }) => {
 
 const ReportsToList = ({ node }: { node: TRoleNode }) => {
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       {node.role.reportsToRoleSlugs.map((s, key) => (
         <TeamMemberCard key={key} node={getRoleNode(getRole(s))} />
       ))}
