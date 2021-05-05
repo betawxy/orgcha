@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Link from "next/link";
 
 export default function PageWrapper({ children }) {
@@ -15,7 +14,7 @@ export default function PageWrapper({ children }) {
         <div className="beta-container">{children}</div>
       </main>
       <footer className="beta-hf-wrapper h-24 bg-blue-100">
-        <div className="beta-container text-gray-600">
+        <div className="beta-container text-gray-500">
           &copy; {new Date().getFullYear()} orgcha.com - crowd sourced
           org-charts for all
         </div>

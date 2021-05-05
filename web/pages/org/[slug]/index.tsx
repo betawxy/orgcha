@@ -1,22 +1,19 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import PageWrapper from "components/pageWrapper";
-import { TOrg, TRole, TRoleNode } from "store/type";
-import { getOrg, getOrgChart, getOrgKeyPeople } from "store/utils";
-
-import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
+import { TOrg, TRoleNode } from "store/type";
+import { getOrg, getOrgKeyPeople } from "store/utils";
 
 export default function OrgPage() {
   const router = useRouter();
-  const { slug, n } = router.query;
+  const { slug } = router.query;
   const org: TOrg = getOrg(slug as string);
   if (!org) {
     return null;
   }
   const keyPeople: Array<TRoleNode> = getOrgKeyPeople(org);
-  const oc: Array<TRoleNode[]> = getOrgChart(org, (n as string) || "");
 
   return (
     <PageWrapper>
@@ -32,24 +29,6 @@ export default function OrgPage() {
             <TeamMemberCard key={key} node={node} />
           ))}
         </div>
-      </section>
-      <section className="my-6 border-t border-blue-300">
-        <div className="text-2xl mt-6 mb-6">Org Chart</div>
-        {oc.map((row, key) => (
-          <Fragment key={key}>
-            {key > 0 && row.length > 0 && (
-              <div className="flex flex-col justify-center -mt-4">
-                <div className="self-center h-4 border-l border-blue-400"></div>
-                <div className="self-center w-full h-4 border-t border-l border-r border-blue-400 rounded-t-xl"></div>
-              </div>
-            )}
-            <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-200 rounded-xl">
-              {row.map((node, k) => (
-                <OCPersonCard key={k} node={node} />
-              ))}
-            </div>
-          </Fragment>
-        ))}
       </section>
     </PageWrapper>
   );
@@ -70,56 +49,13 @@ export const TeamMemberCard = ({ node }: { node: TRoleNode }) => {
               </Link>
             </span>
           </div>
-          <div className="text-gray-500">{node.role.name}</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
-  const openOrgChart = (role: TRole) => {};
-  return (
-    <div className="flex flex-col flex-none w-1/3 px-6 py-4 justify-center">
-      <div className="flex w-full bg-blue-50 hover:bg-white p-3 rounded">
-        <div className="flex-none w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-          <img className="object-fill" src={node.person.image} />
-        </div>
-        <div className="flex flex-grow items-center ml-4">
-          <div>
-            <div>
-              <span className="beta-link">
-                <Link href={`/people/${node.person.slug}`}>
-                  {node.person.name}
-                </Link>
-              </span>
-            </div>
-            <div className="text-gray-600 text-sm">{node.role.name}</div>
+          <div className="beta-link text-gray-500">
+            <Link href={`/org/${node.org.slug}/${node.role.slug}`}>
+              {node.role.name}
+            </Link>
           </div>
         </div>
       </div>
-      <Link
-        href={{
-          pathname: `/org/${node.org.slug}`,
-          query: { n: node.role.slug },
-        }}
-      >
-        {node.expanded ? (
-          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800">
-            <div className="mr-1">
-              {node.role.directReportsRoleSlugs.length}
-            </div>
-            <BiChevronsUp />
-          </button>
-        ) : (
-          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400">
-            <div className="mr-1">
-              {node.role.directReportsRoleSlugs.length}
-            </div>
-            <BiChevronsDown />
-          </button>
-        )}
-      </Link>
     </div>
   );
 };
@@ -137,27 +73,3 @@ const OrgHeader = ({ org }: { org: TOrg }) => {
     </section>
   );
 };
-
-/* 
-
-7/1 2.25 apprasial fee + doc fee 59.5 495 21 3k
-
-$3, 532;
-$1500;
-
-495;
-20.7;
-
-$822276
-2.25%
-?0.882 pt
-10610 -> 
-
-$3400
-
-2.375 + 510
-
-Narcun Jenkin
-949 308 6935
-
-*/
