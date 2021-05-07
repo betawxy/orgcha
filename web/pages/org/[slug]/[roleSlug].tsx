@@ -30,10 +30,17 @@ export default function RolePage() {
                 <div className="self-center w-full h-4 border-t border-l border-r border-blue-400 rounded-t-xl"></div>
               </div>
             )}
-            <div className="flex flex-wrap w-full justify-center -mt-4 hover:bg-blue-200 rounded-xl">
-              {row.map((node, k) => (
-                <OCPersonCard key={k} node={node} />
-              ))}
+            <div className="-mt-4">
+              <div className="flex flex-wrap w-full justify-center mt-6">
+                {row.slice(1).map((node, k) => (
+                  <OCPersonCard key={k} node={node} />
+                ))}
+              </div>
+              <div className="flex flex-wrap w-full justify-center">
+                {row.slice(0, 1).map((node, k) => (
+                  <OCPersonCard key={k} node={node} />
+                ))}
+              </div>
             </div>
           </Fragment>
         ))}
@@ -43,10 +50,9 @@ export default function RolePage() {
 }
 
 export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
-  const openOrgChart = (role: TRole) => {};
   return (
-    <div className="flex flex-col flex-none w-1/3 px-6 py-4 justify-center">
-      <div className="flex w-full bg-blue-50 hover:bg-white p-3 rounded">
+    <div className="flex flex-col flex-none w-1/3 px-6 pb-4 justify-center">
+      <div className="flex w-full bg-blue-50 hover:bg-blue-100 p-3 rounded">
         <div className="flex-none w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
           <img className="object-fill" src={node.person.image} />
         </div>
@@ -65,14 +71,14 @@ export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
       </div>
       <Link href={`/org/${node.org.slug}/${node.role.slug}`}>
         {node.expanded ? (
-          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800">
+          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800 hover:bg-blue-600">
             <div className="mr-1">
               {node.role.directReportsRoleSlugs.length}
             </div>
             <BiChevronsUp />
           </button>
         ) : (
-          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400">
+          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400 hover:bg-blue-600">
             <div className="mr-1">
               {node.role.directReportsRoleSlugs.length}
             </div>

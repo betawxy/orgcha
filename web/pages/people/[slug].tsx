@@ -31,8 +31,8 @@ export default function PeoplePage() {
       </section>
       <section className="space-y-3">
         {personOrgs.map((node, k) => (
-          <div className="bg-blue-100 py-6 rounded" key={k}>
-            <div className="border-b border-blue-300">
+          <div className="bg-blue-50 py-6 rounded" key={k}>
+            <div className="border-b border-blue-200">
               <div className="text-xl px-6 pb-3">
                 <span>{node.role.name} - </span>
                 <span className="beta-link">
