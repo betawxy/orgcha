@@ -30,18 +30,28 @@ export default function RolePage() {
                 <div className="self-center w-full h-4 border-t border-l border-r border-blue-400 rounded-t-xl"></div>
               </div>
             )}
-            <div className="-mt-4">
-              <div className="flex flex-wrap w-full justify-center mt-6">
-                {row.slice(1).map((node, k) => (
-                  <OCPersonCard key={k} node={node} />
-                ))}
+            {key === oc.length - 1 ? (
+              <div className="-mt-4">
+                <div className="flex flex-wrap w-full justify-center mt-6">
+                  {row.map((node, k) => (
+                    <OCPersonCard key={k} node={node} />
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap w-full justify-center">
-                {row.slice(0, 1).map((node, k) => (
-                  <OCPersonCard key={k} node={node} />
-                ))}
+            ) : (
+              <div className="-mt-4">
+                <div className="flex flex-wrap w-full justify-center mt-6">
+                  {row.slice(1).map((node, k) => (
+                    <OCPersonCard key={k} node={node} />
+                  ))}
+                </div>
+                <div className="flex flex-wrap w-full justify-center">
+                  {row.slice(0, 1).map((node, k) => (
+                    <OCPersonCard key={k} node={node} />
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </Fragment>
         ))}
       </section>
