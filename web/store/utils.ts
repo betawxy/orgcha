@@ -50,6 +50,21 @@ export function getOrgChart(
       }
     }
     stack = stack.reverse();
+    for (let i = 0; i < stack.length; i++) {
+      if (i === 0) {
+        org.ocRootsRoleSlugs.forEach((s) => {
+          if (s !== stack[i][0].role.slug) {
+            stack[i].push(getRoleNode(getRole(s)));
+          }
+        });
+      } else {
+        stack[i - 1][0].role.directReportsRoleSlugs.forEach((s) => {
+          if (s !== stack[i][0].role.slug) {
+            stack[i].push(getRoleNode(getRole(s)));
+          }
+        });
+      }
+    }
 
     if (role.directReportsRoleSlugs.length > 0) {
       stack.push(
