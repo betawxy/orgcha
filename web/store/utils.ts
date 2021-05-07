@@ -34,9 +34,10 @@ export function getOrgChart(
   org: TOrg,
   entryRoleSlug: string
 ): Array<TRoleNode[]> {
+  let stack = [];
+
   const role = getRole(entryRoleSlug);
   if (!!role && role.orgSlug === org.slug) {
-    let stack = [];
     let cur = role;
     while (!!cur) {
       let curNode = getRoleNode(cur);
@@ -55,17 +56,8 @@ export function getOrgChart(
         role.directReportsRoleSlugs.map((s) => getRoleNode(getRole(s)))
       );
     }
-    return stack;
   }
-  const roots = org.ocRootsRoleSlugs.map((s) => getRoleNode(getRole(s)));
-  const res = [roots];
-  if (roots.length > 0 && roots[0].role.directReportsRoleSlugs.length > 0) {
-    roots[0].expanded = true;
-    res.push(
-      roots[0].role.directReportsRoleSlugs.map((s) => getRoleNode(getRole(s)))
-    );
-  }
-  return res;
+  return stack;
 }
 
 export function getPersonOrgs(person: TPerson): Array<TRoleNode> {
