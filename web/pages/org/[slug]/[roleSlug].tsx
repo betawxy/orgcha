@@ -4,7 +4,8 @@ import Link from "next/link";
 import PageWrapper from "components/pageWrapper";
 import { getOrg, getOrgChart } from "store/utils";
 import { TOrg, TRole, TRoleNode } from "store/type";
-import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
+import { MdCenterFocusStrong } from "react-icons/md";
+import { BsChevronBarExpand } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { OrgHeader } from ".";
 
@@ -81,18 +82,18 @@ export const OCPersonCard = ({ node }: { node: TRoleNode }) => {
       </div>
       <Link href={`/org/${node.org.slug}/${node.role.slug}`}>
         {node.expanded ? (
-          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800 hover:bg-blue-600">
-            <div className="mr-1">
+          <button className="flex items-center self-center px-3 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-800 hover:bg-blue-600">
+            <div className="mr-2">
               {node.role.directReportsRoleSlugs.length}
             </div>
-            <BiChevronsUp />
+            <MdCenterFocusStrong />
           </button>
         ) : (
-          <button className="flex items-center self-center px-2 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400 hover:bg-blue-600">
-            <div className="mr-1">
+          <button className="flex items-center self-center px-3 -mt-3  text-white text-sm rounded-xl focus:outline-none bg-blue-400 hover:bg-blue-600">
+            <div className="mr-2">
               {node.role.directReportsRoleSlugs.length}
             </div>
-            <BiChevronsDown />
+            <BsChevronBarExpand />
           </button>
         )}
       </Link>

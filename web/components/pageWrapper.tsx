@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GiOrganigram } from "react-icons/gi";
 
 export default function PageWrapper({ children }) {
   return (
@@ -6,7 +7,12 @@ export default function PageWrapper({ children }) {
       <header className="beta-hf-wrapper h-16 bg-blue-800">
         <nav className="beta-container">
           <div className="text-3xl text-white">
-            <Link href="/">orgcha</Link>
+            <Link href="/">
+              <div className="flex flex-none items-center">
+                <GiOrganigram />
+                <div className="ml-3">orgcha</div>
+              </div>
+            </Link>
           </div>
         </nav>
       </header>
