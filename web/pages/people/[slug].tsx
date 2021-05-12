@@ -7,6 +7,7 @@ import PageWrapper from "components/pageWrapper";
 import { TRoleNode } from "store/type";
 import { getRoleNode, getPerson, getPersonOrgs, getRole } from "store/utils";
 import { TeamMemberCard } from "pages/org/[slug]";
+import { SiLinkedin } from "react-icons/si";
 
 export default function PeoplePage() {
   const router = useRouter();
@@ -29,6 +30,15 @@ export default function PeoplePage() {
           <div className="ml-6 text-2xl text-gray-800">{person.name}</div>
         </div>
       </section>
+      {person.social.linkedin.length > 0 && (
+        <section className="flex my-12">
+          <Link href={person.social.linkedin}>
+            <div className="text-xl cursor-pointer">
+              <SiLinkedin />
+            </div>
+          </Link>
+        </section>
+      )}
       <section className="space-y-3">
         {personOrgs.map((node, k) => (
           <div className="bg-blue-50 py-6 rounded" key={k}>

@@ -130,6 +130,9 @@ export const PERSONS: { [key: string]: TPerson } = {
     roleSlugs: ["facebook_mark-zuckerberg-S8r3", "czi_mark-zuckerberg-S8r3"],
     image:
       "https://pbs.twimg.com/profile_images/378800000639973627/f5513282d87d24168fd8f83daf7ebca0.jpeg",
+    social: {
+      linkedin: "",
+    },
   },
   "sheryl-sandberg-da1f": {
     slug: "sheryl-sandberg-da1f",
@@ -137,6 +140,9 @@ export const PERSONS: { [key: string]: TPerson } = {
     roleSlugs: ["facebook_sheryl-sandberg-da1f"],
     image:
       "https://mk0globalleaderbprs8.kinstacdn.com/wp-content/uploads/2018/05/Sheryl_Sandberg-128x128.png",
+    social: {
+      linkedin: "",
+    },
   },
   "chris-cox-89as": {
     slug: "chris-cox-89as",
@@ -144,6 +150,9 @@ export const PERSONS: { [key: string]: TPerson } = {
     roleSlugs: ["facebook_chris-cox-89as"],
     image:
       "https://www.industryleadersmagazine.com/wp-content/uploads/2020/06/Chris-Cox.jpg",
+    social: {
+      linkedin: "https://www.linkedin.com/in/chris-cox-2896b841",
+    },
   },
   "mike-schroepfer-1sa0": {
     slug: "mike-schroepfer-1sa0",
@@ -151,12 +160,18 @@ export const PERSONS: { [key: string]: TPerson } = {
     roleSlugs: ["facebook_mike-schroepfer-1sa0"],
     image:
       "https://pbs.twimg.com/profile_images/1210715117005889542/qe4GSFW5.jpg",
+    social: {
+      linkedin: "https://www.linkedin.com/in/schrep",
+    },
   },
   "andrew-bosworth-8923": {
     slug: "andrew-bosworth-8923",
     name: "Andrew Bosworth",
     roleSlugs: ["facebook_andrew-bosworth-8923"],
     image: DEFAULT_USER_ICON,
+    social: {
+      linkedin: "",
+    },
   },
   "joe-biden-9123": {
     slug: "joe-biden-9123",
@@ -164,6 +179,9 @@ export const PERSONS: { [key: string]: TPerson } = {
     roleSlugs: ["us-federal-gov_joe-biden-9123"],
     image:
       "https://img.thedailybeast.com/image/upload/dpr_2.0/c_crop,h_3095,w_3095,x_332,y_-1/c_limit,w_128/d_placeholder_euli9k,fl_lossy,q_auto/v1584982783/RTS35TX1_d9m7qp",
+    social: {
+      linkedin: "",
+    },
   },
   "sundar-pichai-124a": {
     slug: "sundar-pichai-124a",
@@ -171,5 +189,8 @@ export const PERSONS: { [key: string]: TPerson } = {
     roleSlugs: ["google_sundar-pichai-124a"],
     image:
       "https://pbs.twimg.com/profile_images/864282616597405701/M-FEJMZ0_400x400.jpg",
+    social: {
+      linkedin: "",
+    },
   },
 };

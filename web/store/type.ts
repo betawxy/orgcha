@@ -12,6 +12,9 @@ export type TPerson = {
   name: string;
   image: string;
   roleSlugs: string[];
+  social: {
+    linkedin: string;
+  };
 };
 
 export type TRole = {
