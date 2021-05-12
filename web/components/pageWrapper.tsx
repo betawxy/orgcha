@@ -6,11 +6,11 @@ export default function PageWrapper({ children }) {
     <div className="beta-page-wrapper text-gray-800">
       <header className="beta-hf-wrapper h-16 bg-blue-800">
         <nav className="beta-container">
-          <div className="text-3xl text-white cursor-pointer">
+          <div className="text-4xl text-white cursor-pointer">
             <Link href="/">
               <div className="flex flex-none items-center">
                 <GiOrganigram />
-                <div className="ml-3">orgcha</div>
+                <div className="ml-5 text-3xl">Orgcha</div>
               </div>
             </Link>
           </div>
