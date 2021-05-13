@@ -2,7 +2,8 @@ import { ROLES, ORGS, PERSONS } from "./data";
 import { TRole, TOrg, TPerson, TRoleNode } from "./type";
 
 export function getPopularOrgs(): Array<TOrg> {
-  return [ORGS["google"], ORGS["facebook"], ORGS["us-federal-gov"]];
+  // return [ORGS["google"], ORGS["facebook"], ORGS["us-federal-gov"]];
+  return [ORGS["google"], ORGS["facebook"]];
 }
 
 export function getOrg(slug: string): TOrg {
