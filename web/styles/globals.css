@@ -7,16 +7,10 @@ body {
 }
 
 @layer components {
-  .beta-page-wrapper {
-    @apply flex flex-col justify-between w-screen h-screen;
-  }
-  .beta-hf-wrapper {
-    @apply flex flex-none items-center w-full;
-  }
   .beta-container {
     @apply container mx-auto max-w-screen-lg w-full px-3;
   }
   .beta-link {
-    @apply text-blue-800 border-b-2 border-blue-200 border-dashed cursor-pointer hover:text-blue-200 hover:bg-blue-800 hover:border-blue-800;
+    @apply text-blue-800 cursor-pointer hover:text-blue-200 hover:bg-blue-800;
   }
 }
