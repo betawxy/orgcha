@@ -37,7 +37,7 @@ export const TeamMemberCard = ({ node }: { node: TRoleNode }) => {
       <div className="flex-none w-14 h-14 rounded-full bg-gray-200 overflow-hidden">
         <img className="object-fill" src={node.person.image} />
       </div>
-      <div className="flex flex-grow items-center ml-4">
+      <div className="flex flex-grow items-center mx-4">
         <div>
           <div>
             <span className="beta-link text-sm">

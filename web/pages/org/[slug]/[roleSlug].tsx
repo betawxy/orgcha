@@ -77,7 +77,9 @@ export const OCPersonCard = ({
                 </Link>
               </span>
             </div>
-            <div className="text-gray-600 text-sm">{node.role.name}</div>
+            <div className="text-gray-600 text-sm line-clamp-1">
+              {node.role.name}
+            </div>
           </div>
         </div>
       </div>
