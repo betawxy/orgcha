@@ -3,7 +3,7 @@ import { TRole, TOrg, TPerson, TRoleNode } from "./type";
 
 export function getPopularOrgs(): Array<TOrg> {
   // return [ORGS["google"], ORGS["facebook"], ORGS["us-federal-gov"]];
-  return [ORGS["google"], ORGS["facebook"]];
+  return Object.values(ORGS);
 }
 
 export function getOrg(slug: string): TOrg {
@@ -19,6 +19,7 @@ export function getRole(slug: string): TRole {
 }
 
 export function getRoleNode(role: TRole): TRoleNode {
+  if (!role) return null;
   return {
     role: role,
     org: ORGS[role.orgSlug],
@@ -55,13 +56,19 @@ export function getOrgChart(
       if (i === 0) {
         org.ocRootsRoleSlugs.forEach((s) => {
           if (s !== stack[i][0].role.slug) {
-            stack[i].push(getRoleNode(getRole(s)));
+            const n = getRoleNode(getRole(s));
+            if (!!n) {
+              stack[i].push(n);
+            }
           }
         });
       } else {
         stack[i - 1][0].role.directReportsRoleSlugs.forEach((s) => {
           if (s !== stack[i][0].role.slug) {
-            stack[i].push(getRoleNode(getRole(s)));
+            const n = getRoleNode(getRole(s));
+            if (!!n) {
+              stack[i].push(n);
+            }
           }
         });
       }
@@ -69,7 +76,9 @@ export function getOrgChart(
 
     if (role.directReportsRoleSlugs.length > 0) {
       stack.push(
-        role.directReportsRoleSlugs.map((s) => getRoleNode(getRole(s)))
+        role.directReportsRoleSlugs
+          .map((s) => getRoleNode(getRole(s)))
+          .filter((e) => !!e)
       );
     }
   }

@@ -31,6 +31,7 @@ export default function OrgPage() {
 }
 
 export const TeamMemberCard = ({ node }: { node: TRoleNode }) => {
+  if (!node) return null;
   return (
     <div className="flex flex-none w-1/4 my-3">
       <div className="flex-none w-14 h-14 rounded-full bg-gray-200 overflow-hidden">
