@@ -16,7 +16,7 @@ export default function PageWrapper({ children }) {
           </div>
         </nav>
       </header>
-      <main className="w-full mb-auto">
+      <main className="w-full mb-auto pb-20">
         <div className="beta-container">{children}</div>
       </main>
       <footer className="beta-hf-wrapper h-24 bg-blue-100">
