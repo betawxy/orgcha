@@ -82,6 +82,21 @@ export function getOrgChart(
       );
     }
   }
+  for (const i in stack) {
+    const p = stack[i].shift();
+    if (stack[i].length % 3 === 0) {
+      stack[i].push(null);
+      stack[i].push(p);
+      stack[i].push(null);
+    } else if (stack[i].length % 3 === 1) {
+      stack[i].push(p);
+      stack[i].push(null);
+    } else {
+      const t = stack[i][stack[i].length - 1];
+      stack[i][stack[i].length - 1] = p;
+      stack[i].push(t);
+    }
+  }
   return stack;
 }
 

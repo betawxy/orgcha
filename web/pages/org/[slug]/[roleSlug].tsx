@@ -30,40 +30,40 @@ export default function RolePage() {
                 <div className="self-center w-full h-4 border-t border-l border-r border-blue-400 rounded-t-xl"></div>
               </div>
             )}
-            {key === oc.length - 1 ? (
-              <div className="-mt-4">
-                <div className="flex flex-wrap w-full justify-center mt-6">
-                  {row.map((node, k) => (
-                    <OCPersonCard
-                      key={k}
-                      node={node}
-                      isCenterNode={node.role.slug === roleSlug}
-                    />
-                  ))}
-                </div>
+            {/* {key === oc.length - 1 ? ( */}
+            <div className="-mt-4">
+              <div className="flex flex-wrap w-full justify-center mt-6">
+                {row.map((node, k) => (
+                  <OCPersonCard
+                    key={k}
+                    node={node}
+                    isCenterNode={!!node && node.role.slug === roleSlug}
+                  />
+                ))}
               </div>
-            ) : (
-              <div className="-mt-4">
-                <div className="flex flex-wrap w-full justify-center mt-6">
-                  {row.slice(1).map((node, k) => (
-                    <OCPersonCard
-                      key={k}
-                      node={node}
-                      isCenterNode={node.role.slug === roleSlug}
-                    />
-                  ))}
-                </div>
-                <div className="flex flex-wrap w-full justify-center">
-                  {row.slice(0, 1).map((node, k) => (
-                    <OCPersonCard
-                      key={k}
-                      node={node}
-                      isCenterNode={node.role.slug === roleSlug}
-                    />
-                  ))}
-                </div>
+            </div>
+            {/* ) : ( */}
+            {/* <div className="-mt-4">
+              <div className="flex flex-wrap w-full justify-center mt-6">
+                {row.slice(1).map((node, k) => (
+                  <OCPersonCard
+                    key={k}
+                    node={node}
+                    isCenterNode={!!node && node.role.slug === roleSlug}
+                  />
+                ))}
               </div>
-            )}
+              <div className="flex flex-wrap w-full justify-center">
+                {row.slice(0, 1).map((node, k) => (
+                  <OCPersonCard
+                    key={k}
+                    node={node}
+                    isCenterNode={!!node && node.role.slug === roleSlug}
+                  />
+                ))}
+              </div>
+            </div> */}
+            {/* )} */}
           </Fragment>
         ))}
       </section>
@@ -78,6 +78,11 @@ export const OCPersonCard = ({
   node: TRoleNode;
   isCenterNode: boolean;
 }) => {
+  if (!node) {
+    return (
+      <div className="flex flex-col flex-none w-1/3 px-6 pb-4 justify-center"></div>
+    );
+  }
   let color = isCenterNode ? "green" : "blue";
   let bgv = node.expanded ? "600" : "400";
   return (
