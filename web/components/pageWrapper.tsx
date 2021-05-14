@@ -21,8 +21,7 @@ export default function PageWrapper({ children }) {
       </main>
       <footer className="flex flex-none items-center w-full h-24 bg-blue-100">
         <div className="beta-container text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} orgcha.com - crowd sourced
-          org-charts for all
+          &copy; {new Date().getFullYear()} Orgcha.com
         </div>
       </footer>
     </div>
