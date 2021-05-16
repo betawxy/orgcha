@@ -5,6 +5,12 @@ class OrgSpider(scrapy.Spider):
     name = 'org'
     allowed_domains = ['theorg.com']
     start_urls = ['https://theorg.com/explore/organizations/']
+    headers = {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36',
+        'Accept-Language': 'en-US,en;q=0.9',
+    }
+    refer_url = 'http://kan.sogou.com/player/{}/'
 
     def parse(self, response):
         yield from response.follow_all(response.css('._3awnS > a'), self.parse_org)
